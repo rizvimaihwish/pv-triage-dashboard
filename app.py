@@ -3,14 +3,15 @@ import pandas as pd
 import plotly.express as px
 import datetime
 
-# --- 1. CORE SYSTEM PROPERTIES (Must be first) ---
+# --- 1. SYSTEM STANDARDS CONFIGURATION (Must be first) ---
 st.set_page_config(page_title="AuraWellness Studio", page_icon="🌸", layout="wide")
 
-# --- 2. ELITE GLASSMORPHIC LUXURY PASTEL CSS SHEET ---
+# --- 2. ADVANCED CHIC PASTEL GLAMOUR STYLE SHEET ---
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght=0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght=0,200..800;1,200..800&display=swap');
     
+    /* Luxury Aesthetic Aura Fluid Canvas Background Wallpaper */
     .stApp {
         background-image: linear-gradient(to bottom, rgba(250, 246, 240, 0.88), rgba(246, 239, 242, 0.92)), 
                           url('https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=1600');
@@ -18,9 +19,11 @@ st.markdown("""
     }
     html, body, [class*="css"] { font-family: 'Plus Jakarta Sans', sans-serif; color: #4A3E3D; }
     
+    /* Calligraphed Luxury Heading Styles */
     .brand-title { font-family: 'Playfair Display', serif; color: #4C2A4E; font-weight: 900; font-size: 3.5rem; text-align: center; letter-spacing: -0.5px; margin-bottom: 5px; }
     .brand-subtitle { font-family: 'Plus Jakarta Sans', sans-serif; color: #8A6F8A; font-size: 1.2rem; font-weight: 400; text-align: center; margin-bottom: 35px; }
     
+    /* Elegant Content Glassmorphic Cards */
     .window-container { background-color: rgba(255, 255, 255, 0.82); backdrop-filter: blur(12px); border-radius: 24px; padding: 35px; border: 1px solid rgba(240, 228, 236, 0.8); box-shadow: 0 15px 35px rgba(224, 211, 219, 0.2); margin-bottom: 30px; }
     .meal-box { background-color: rgba(255, 255, 255, 0.9); border-radius: 14px; padding: 18px; margin-bottom: 15px; border-left: 5px solid #F472B6; box-shadow: 0 4px 12px rgba(224, 211, 219, 0.05); }
     .workout-box { background-color: rgba(255, 255, 255, 0.9); border-radius: 14px; padding: 18px; margin-bottom: 15px; border-left: 5px solid #A7F3D0; box-shadow: 0 4px 12px rgba(224, 211, 219, 0.05); }
@@ -28,6 +31,7 @@ st.markdown("""
     .provider-box { background-color: #FAFAF9; border-radius: 12px; padding: 18px; border-left: 4px solid #C084FC; margin-bottom: 12px; }
     .grocery-box { background-color: rgba(244, 251, 247, 0.85); padding: 15px; border-radius: 12px; border: 1px dashed #A7F3D0; margin-top: 15px; }
     
+    /* Soft Girly Shimmer Gradient Push Buttons */
     div.stButton > button {
         background: linear-gradient(135deg, #F472B6 0%, #C084FC 100%) !important;
         color: white !important; font-weight: 700 !important; border-radius: 30px !important;
@@ -50,16 +54,12 @@ def jump_to_window(window_id):
     st.session_state.active_window = window_id
     st.rerun()
 
-# --- BRANDING LAYER ---
-st.markdown("<h1 class='brand-title'>🌸 AuraWellness Studio</h1>", unsafe_allow_html=True)
-st.markdown("<p class='brand-subtitle'>Clinical Endocrine Recalibration & Multi-Window Lifestyle Platform</p>", unsafe_allow_html=True)
-
 # ==========================================
 # WINDOW 1: PORTAL INTRODUCTION
 # ==========================================
 if st.session_state.active_window == 1:
     st.markdown("<div class='window-container'>", unsafe_allow_html=True)
-    st.image("https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1600", use_container_width=True)
+    st.image("https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200", use_container_width=True)
     
     st.markdown("<h3 style='font-family: \"Playfair Display\", serif; color: #4C2A4E; text-align:center;'>Welcome to a New Horizon of Feminine Metabolic Health</h3>", unsafe_allow_html=True)
     st.markdown("""
@@ -135,7 +135,7 @@ elif st.session_state.active_window == 3:
     p_calc = (sum([s1, s3, s4, s6, s7, s10]) / 6) * 100
     t_calc = (sum([s1, s2, s5, s6, s8, s9]) / 6) * 100
     
-    if p_calc == 0 and t_calc == 0: st.session_state.survey_score = "General Balance Core"
+    if p_calc == 0 and t_calc == 0: st.session_state.survey_score = "General Wellness Core"
     elif p_calc >= t_calc: st.session_state.survey_score = "PCOS Focus Protocol"
     else: st.session_state.survey_score = "Hypothyroidism Target"
         
@@ -157,7 +157,7 @@ elif st.session_state.active_window == 4:
     with st.expander("🔄 Open Metric Converter Tool (Push Up/Down for Imperial Variables)", expanded=False):
         uc1, uc2 = st.columns(2)
         with uc1:
-            lbs_in = st.number_input("Weight conversion value from Pounds (lbs):", value=u_wt * 2.20462)
+            lbs_in = st.number_input("Weight conversion value from Pounds (lbs):", value=float(u_wt * 2.20462))
             st.code(f"Parsed Metric: {lbs_in / 2.20462:.1f} kg")
         with uc2:
             st.markdown("**Height conversion from Feet/Inches:**")
@@ -187,20 +187,18 @@ elif st.session_state.active_window == 4:
     st.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
-# WINDOW 5: THE 30-DAY CHALLENGE PACK (FULLY SEPARATED ARCHITECTURE)
+# WINDOW 5: THE 30-DAY CHALLENGE PACK (ROBUST STATIC RESOURCE MATRIX)
 # ==========================================
 elif st.session_state.active_window == 5:
     st.markdown("<div class='window-container'>", unsafe_allow_html=True)
     st.markdown(f"<h3 style='font-family: \"Playfair Display\", serif; color: #4C2A4E;'>📅 The 30-Day Endocrine Challenge Matrix ({st.session_state.target_goal.split(' ')[0]} Mode)</h3>", unsafe_allow_html=True)
     st.write(f"Screening Context: **{st.session_state.survey_score}**")
     
-    # Hero Culinary Image Asset
-    st.image("image_agent_tag_661660542252442506", caption="Aura Studio Curated Balanced Indian Culinary Blueprint", use_container_width=True)
+    st.image("https://images.unsplash.com/photo-1540420773420-3366772f4999?w=1200", caption="Aura Studio Curated Balanced Indian Culinary Blueprint", use_container_width=True)
     
     active_phase = st.radio("Select Target Challenge Timeline Window:", ["Phase 1 (Days 1-10)", "Phase 2 (Days 11-20)", "Phase 3 (Days 21-30)"], horizontal=True)
     
-    # COMPLETE SEPARATED MULTI-DIMENSIONAL MEDICAL MATRIX DATA MAP
-    # Formulating completely distinct tracks for PCOS-Loss, PCOS-Gain, Thyroid-Loss, Thyroid-Gain
+    # COMPLETE SEPARATED MULTI-DIMENSIONAL SYSTEM RE-STRUCTURE
     if "PCOS" in st.session_state.survey_score:
         if "Loss" in st.session_state.target_goal:
             detox = "🧉 Morning: Warm Spearmint Leaf Tea + Cinnamon Grate (Targets insulin curves)"
@@ -213,7 +211,7 @@ elif st.session_state.active_window == 5:
             ex_details = "• **Squats:** 3 sets x 15 reps (Rest 60s).<br>• **Wall Pushups:** 3 sets x 12 reps.<br>• **Post-Meal Walking:** 20 minutes slow-paced walk within 30 mins after your largest meal to clear glucose surges."
             yoga_title = "🧘‍♀️ Butterfly Pose (Baddha Konasana) for PCOS Pelvic Recovery"
             yoga_desc = "Sit straight, join the soles of your feet, and gently flutter your knees up and down. Maintain slow nasal breathing. • **Duration:** 8-10 mins daily. Stimulates healthy blood circulation to the reproductive axis."
-            yoga_img = "image_agent_tag_661660542252443559"
+            yoga_img = "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400"
         else: # PCOS Weight Gain
             detox = "🥛 Morning: Warm Almond-Date Infused Whole Milk (Calorie dense matrix start)"
             bfast = "🫓 Breakfast: 2 Paneer Stuffed Multigrain Parathas cooked in 1 tsp Ghee + Curd"
@@ -226,6 +224,7 @@ elif st.session_state.active_window == 5:
             yoga_title = "🧘‍♀️ Supta Baddha Konasana (Reclined Cobras Alignment)"
             yoga_desc = "Lie flat on your back with soles of feet touching, letting gravity gently expand the pelvic floor. • **Duration:** 10 mins. Lowers central nervous stress variables."
             yoga_img = "image_agent_tag_661660542252443559"
+            yoga_img = "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400"
             
     elif "Thyroid" in st.session_state.survey_score:
         if "Loss" in st.session_state.target_goal:
@@ -239,7 +238,7 @@ elif st.session_state.active_window == 5:
             ex_details = "• **Brisk Walking:** 25-30 minutes under direct morning sunlight to synthesize Vitamin D and awaken thyroid cells.<br>• **Standing High Knees:** 3 sets x 20 reps to safely raise baseline resting metabolism variables."
             yoga_title = "🧘‍♀️ Supported Shoulder Stand (Sarvangasana) for Thyroid Gland Massaging"
             yoga_desc = "Lie on your back, lift your torso vertically, and support your lower back with your hands. • **Duration:** 3-5 mins. Induces hydrostatic parameters that stimulate the throat chakra axis."
-            yoga_img = "image_agent_tag_661660542252445665"
+            yoga_img = "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400"
         else: # Thyroid Weight Gain
             detox = "🥛 Morning: Warm Ashwagandha Turmeric Laced Dairy Milk (Lowers baseline TSH stress parameters)"
             bfast = "🫓 Breakfast: 2 Mixed Vegetable Parathas served with a dollop of fresh White Butter"
@@ -251,9 +250,9 @@ elif st.session_state.active_window == 5:
             ex_details = "• **Supported Wall Sits:** 3 sets x 30-second steady holds to secure quadriceps density templates.<br>• **Floor Bird-Dogs:** 3 sets x 10 reps per side to stabilize back extensor tissue lines cleanly."
             yoga_title = "🧘‍♀️ Fish Pose (Matsyasana) for Thyroid Extension"
             yoga_desc = "Arch your back while lying down, resting the crown of your head on the floor to expand your neck structure. • **Duration:** 4 mins. Restores optimal circulation arrays."
-            yoga_img = "image_agent_tag_661660542252445665"
+            yoga_img = "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400"
             
-    else: # General Balance Baseline Fallback Paths
+    else: # General Balance Fallback Paths
         detox = "🍀 Morning: Warm Fennel (Saunf) Water with a drop of organic Honey"
         bfast = "🥣 Breakfast: Savory Vegetable Dalia or Sprouted Moong Dal Chaat"
         lunch = "🍛 Lunch: 1 Bowl Mixed Lentil Soup + 1 cup seasonal Sabzi + 1 Multigrain Roti"
@@ -264,7 +263,7 @@ elif st.session_state.active_window == 5:
         ex_details = "• Full-body dynamic flexibility routines for 20 minutes daily.<br>• Maintain a baseline goal of 8,000 total stepping movements spread throughout the day."
         yoga_title = "🧘‍♀️ Child's Pose (Balasana) for Mind-Body Harmony"
         yoga_desc = "Kneel down, sit on your heels, extend your arms forward on the ground and lower your chest. • **Duration:** 5 mins. Decompresses spinal column links."
-        yoga_img = "image_agent_tag_661660542252444612"
+        yoga_img = "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400"
 
     # Push Columns Interface (Streamlit Expanders Layout)
     with st.expander("🥤 Step 1: Morning Detox Elixir Protocols (Click to Pull Up/Down)", expanded=True):
@@ -303,7 +302,7 @@ elif st.session_state.active_window == 6:
     st.markdown("<h3 style='font-family: \"Playfair Display\", serif; color: #4C2A4E;'>🚨 Safety Compliance Alarms & Regional Provider Networks</h3>", unsafe_allow_html=True)
     
     u_city_verified = st.session_state.user_data.get('location', 'Lucknow, Uttar Pradesh')
-    w_target_metric = st.session_state.user_data.get('weight', 68.0) * 0.035
+    w_target_metric = float(st.session_state.user_data.get('weight', 68.0) * 0.035)
     
     hud1, hud2 = st.columns(2)
     with hud1:
@@ -332,7 +331,7 @@ elif st.session_state.active_window == 6:
         st.markdown(f"""
         <div class='provider-box'>
             <strong>🏥 Emergency Medical Center & Endocrine Specialists</strong><br>
-            Location Coordinates: Regional映射 Ward, {u_city_verified.split(',')[0]} • Specialized Diagnostic Wing Active
+            Location Coordinates: Regional Peripheral Ward, {u_city_verified.split(',')[0]} • Specialized Diagnostic Wing Active
         </div>
         <div class='provider-box'>
             <strong>💊 Apollo Pharmacy 24x7 Retail Outlets</strong><br>
