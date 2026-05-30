@@ -5,11 +5,26 @@ import datetime
 # --- 1. CORE SYSTEM INITIALIZATION ---
 st.set_page_config(page_title="SHEALTH | AI Precision Coach", page_icon="🔮", layout="wide")
 # Force scroll to top on every rerender
-st.markdown("""
+def show_medical_disclaimer():
+    st.markdown("""
+        <div style='background-color: #FFF1F2; border: 1px solid #FDA4AF; padding: 12px; border-radius: 15px; margin-top: 25px; font-size: 0.75rem; color: #991B1B; text-align: center;'>
+            <strong>⚠️ Medical Disclaimer:</strong> This application provides AI-driven wellness suggestions and is for informational purposes only. 
+            It is not a substitute for professional medical advice, diagnosis, or treatment. Always consult with a qualified healthcare provider 
+            regarding your health or any medical condition.
+        </div>
+    """, unsafe_allow_html=True)
+# Force scroll to top on every window switch (Streamlit specific hack)
+st.components.v1.html(
+    f"""
     <script>
-        window.scrollTo(0, 0);
+        var body = window.parent.document.querySelector('.main');
+        if (body) {{
+            body.scrollTop = 0;
+        }}
     </script>
-""", unsafe_allow_html=True)
+    """,
+    height=0
+)
 
 # --- 2. ELITE CLINICAL CRIMSON & PINTEREST BOTANICAL DOODLE CANVAS ---
 st.markdown("""
@@ -212,6 +227,7 @@ if st.session_state.active_window == 1:
         if st.button("✨ Initialize Profile"):
             jump_to_window(2)
     st.markdown(f"<div class='trending-quote-banner'>{window_quotes[1]}</div>", unsafe_allow_html=True)
+    show_medical_disclaimer()
     st.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
@@ -257,6 +273,7 @@ elif st.session_state.active_window == 2:
         st.session_state.p_reds_last = in_reds
         jump_to_window(3)
     st.markdown(f"<div class='trending-quote-banner'>{window_quotes[2]}</div>", unsafe_allow_html=True)
+    show_medical_disclaimer()
     st.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
@@ -288,6 +305,7 @@ elif st.session_state.active_window == 3:
     if st.button("✨ Process Vectors"):
         jump_to_window(4)
     st.markdown(f"<div class='trending-quote-banner'>{window_quotes[3]}</div>", unsafe_allow_html=True)
+    show_medical_disclaimer()
     st.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
@@ -341,6 +359,7 @@ elif st.session_state.active_window == 4:
     if st.button("🎯 Compile Schedule"):
         jump_to_window(5)
     st.markdown(f"<div class='trending-quote-banner'>{window_quotes[4]}</div>", unsafe_allow_html=True)
+    show_medical_disclaimer()
     st.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
@@ -458,6 +477,7 @@ elif st.session_state.active_window == 5:
     if st.button("🔒 Compliance Center"):
         jump_to_window(6)
     st.markdown(f"<div class='trending-quote-banner'>{window_quotes[5]}</div>", unsafe_allow_html=True)
+    show_medical_disclaimer()
     st.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
@@ -568,4 +588,5 @@ elif st.session_state.active_window == 6:
         st.session_state.active_window = 1
         st.rerun()
     st.markdown(f"<div class='trending-quote-banner'>{window_quotes[6]}</div>", unsafe_allow_html=True)
+    show_medical_disclaimer()
     st.markdown("</div>", unsafe_allow_html=True)
