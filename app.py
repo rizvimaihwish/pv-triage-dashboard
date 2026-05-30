@@ -3,12 +3,12 @@ import pandas as pd
 import datetime
 
 # --- 1. CORE SYSTEM INITIALIZATION ---
-st.set_page_config(page_title="SHEALTH | AI Precision Coach", page_icon="🩸", layout="wide")
+st.set_page_config(page_title="SHEALTH | AI Precision Coach", page_icon="🔮", layout="wide")
 
-# --- 2. ELITE MEDICAL CRIMSON & BOTANICAL GLASSMORPHIC STYLE SHEET ---
+# --- 2. ELITE CLINICAL CRIMSON & PINTEREST BOTANICAL DOODLE CANVAS ---
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Playfair+Display:ital,wght=0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght=0,200..800;1,200..800&display=swap');
+    @import url('https://fonts.unsplash.com/css2?family=Alex+Brush&family=Playfair+Display:ital,wght=0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght=0,200..800;1,200..800&display=swap');
     
     /* Immersive Crimson & Rose Mist Clinical Wallpaper Canvas */
     .stApp {
@@ -17,16 +17,23 @@ st.markdown("""
         background-size: cover; background-position: center; background-attachment: fixed;
     }
     
-    /* Precision Pharmacological & Anatomical Doodles Watermarks */
+    /* Multi-Doodle Watermark Layers (Pills, Capsules, Fruits & Wellness) */
     .stApp::before {
-        content: ""; position: fixed; top: 12%; left: 4%; width: 140px; height: 140px;
-        background-image: url('https://img.icons8.com/external-flatart-icons-outline-flatarticons/100/991B1B/external-urology-medical-health-flatart-icons-outline-flatarticons.png');
-        opacity: 0.12; pointer-events: none; z-index: 0;
+        content: ""; position: fixed; top: 10%; left: 3%; width: 150px; height: 150px;
+        background-image: url('https://img.icons8.com/external-icongeek26-outline-icongeek26/100/991B1B/external-pills-medical-icongeek26-outline-icongeek26.png');
+        opacity: 0.14; pointer-events: none; z-index: 0;
     }
     .stApp::after {
-        content: ""; position: fixed; bottom: 10%; right: 5%; width: 120px; height: 120px;
-        background-image: url('https://img.icons8.com/external-icongeek26-outline-icongeek26/100/991B1B/external-pills-medical-icongeek26-outline-icongeek26.png');
+        content: ""; position: fixed; bottom: 8%; right: 4%; width: 130px; height: 130px;
+        background-image: url('https://img.icons8.com/external-flatart-icons-outline-flatarticons/100/991B1B/external-urology-medical-health-flatart-icons-outline-flatarticons.png');
         opacity: 0.15; pointer-events: none; z-index: 0;
+    }
+    
+    /* Extra Layer for Fruits & Organic Nutrient Doodles */
+    html::after {
+        content: ""; position: fixed; top: 60%; left: 2%; width: 100px; height: 100px;
+        background-image: url('https://img.icons8.com/ios/100/991B1B/healthy-food.png');
+        opacity: 0.10; pointer-events: none; z-index: 0;
     }
     
     html, body, [class*="css"] { font-family: 'Plus Jakarta Sans', sans-serif; color: #451A1A; }
@@ -63,41 +70,19 @@ st.markdown("""
         margin-bottom: 30px; position: relative;
     }
     
-    .window-container::after {
-        content: ""; position: absolute; top: 20px; right: 25px; width: 50px; height: 50px;
-        background-image: url('https://img.icons8.com/ios/50/991B1B/thyroid.png');
-        opacity: 0.12; pointer-events: none;
-    }
-
-    /* Cute Micro Aesthetic Center Doodle Layout */
-    .doodle-center-box {
-        text-align: center; margin: 15px auto 25px auto; padding: 15px;
-        background: rgba(255, 255, 255, 0.6); border-radius: 20px; max-width: 180px;
-        border: 1px solid rgba(254, 202, 202, 0.5);
-    }
-
-    /* Girly Trending Quote Banner */
-    .trending-quote-banner {
-        background: linear-gradient(135deg, #FFF1F2 0%, #FFE4E6 100%);
-        border: 1px dashed #FDA4AF; border-radius: 16px; padding: 15px;
-        font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.05rem;
-        color: #9F1239; text-align: center; margin-top: 35px; box-shadow: 0 4px 12px rgba(225,29,72,0.04);
-    }
-    
     .meal-box { background-color: rgba(255, 255, 255, 0.92); border-radius: 16px; padding: 20px; margin-bottom: 15px; border-left: 5px solid #F87171; box-shadow: 0 4px 15px rgba(153, 27, 27, 0.03); }
     .workout-box { background-color: rgba(255, 255, 255, 0.92); border-radius: 16px; padding: 20px; margin-bottom: 15px; border-left: 5px solid #EF4444; box-shadow: 0 4px 15px rgba(153, 27, 27, 0.03); }
     .detox-badge { display: inline-block; padding: 6px 16px; background-color: #FEF2F2; color: #991B1B; border-radius: 20px; font-size: 0.78rem; font-weight: 700; margin-bottom: 12px; letter-spacing: 0.5px; text-transform: uppercase; border: 1px solid #FEE2E2; }
     .provider-box { background-color: rgba(255, 255, 255, 0.85); border-radius: 14px; padding: 20px; border-left: 4px solid #991B1B; }
     .grocery-box { background-color: rgba(254, 242, 242, 0.85); padding: 18px; border-radius: 14px; border: 1px dashed #F87171; margin-top: 15px; }
     
-    /* Sleek, Compact Action Buttons */
+    /* Compact Shimmering Crimson Buttons */
     div.stButton > button {
         background: linear-gradient(135deg, #F87171 0%, #991B1B 100%) !important;
         color: white !important; font-weight: 700 !important; border-radius: 30px !important;
-        border: none !important; padding: 12px 30px !important; font-size: 0.95rem !important; letter-spacing: 0.5px;
+        border: none !important; padding: 12px 35px !important; font-size: 0.95rem !important; letter-spacing: 0.5px;
         box-shadow: 0 6px 20px rgba(153, 27, 27, 0.25) !important; transition: all 0.3s ease !important;
-        display: block; margin: 0 auto; width: auto; max-width: 280px; text-align: center;
-        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        display: block; margin: 0 auto; width: auto; min-width: 200px; text-align: center;
     }
     div.stButton > button:hover { transform: translateY(-2px) scale(1.01) !important; box-shadow: 0 10px 25px rgba(153, 27, 27, 0.4) !important; }
     
@@ -105,19 +90,24 @@ st.markdown("""
     div[data-testid="stMetricValue"] { font-size: 2.2rem; font-weight: 700; color: #7F1D1D; font-family: 'Playfair Display', serif; }
     div[data-testid="stMetricLabel"] { font-size: 0.85rem; font-weight: 700; color: #991B1B; text-transform: uppercase; letter-spacing: 1px; }
     div[data-testid="stMetric"] { background-color: rgba(255, 255, 255, 0.88) !important; backdrop-filter: blur(6px); border-radius: 18px; padding: 18px; border: 1px solid rgba(254,202,202,0.4); }
+    
+    /* Trending Quote Banner */
+    .trending-quote-banner {
+        background: linear-gradient(135deg, #FFF1F2 0%, #FFE4E6 100%);
+        border: 1px dashed #FDA4AF; border-radius: 16px; padding: 15px;
+        font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.05rem;
+        color: #9F1239; text-align: center; margin-top: 35px;
+    }
     </style>
 """, unsafe_allow_html=True)
 
-# --- 3. INLINE SVG LOGO EMBLEM DESIGN LAYER (NEW ULTRAMINIMAL CLINICAL HEART SHIELD) ---
+# --- 3. PREMIUM AESTHETIC GLASS RING EMBLEM LINE-ART LOGO ---
 st.markdown("""
     <div class='logo-container'>
         <svg width="90" height="90" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0px 6px 14px rgba(153,27,27,0.22));">
-            <!-- Frosted Smooth Glass Ring Dynamic Frame -->
             <circle cx="50" cy="50" r="44" fill="white" fill-opacity="0.85"/>
             <circle cx="50" cy="50" r="41" stroke="url(#crimson_gold_grad)" stroke-width="1.5" stroke-dasharray="4 4"/>
-            <!-- Elegant Pinterest Line Art: Fusion of Heart and Endocrine Curves -->
             <path d="M50 32C42 22 28 26 28 42C28 58 45 70 50 74C55 70 72 58 72 42C72 26 58 22 50 32Z" stroke="url(#crimson_gold_grad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-            <!-- Micro Thyroid Cross section details inside core axis -->
             <path d="M42 46C46 44 54 44 58 46M40 52C45 50 55 50 60 52" stroke="#991B1B" stroke-width="1.5" stroke-linecap="round"/>
             <circle cx="50" cy="46" r="3" fill="#7F1D1D"/>
             <defs>
@@ -133,19 +123,19 @@ st.markdown("""
 """, unsafe_allow_html=True)
 st.markdown("<p class='brand-subtitle'>AI Precision Endocrine Alignment & 30-Day Lifecycle Coaching</p>", unsafe_allow_html=True)
 
-# --- 4. REAL-TIME CALIBRATED DELHI IST TIME STAMP CORE ---
+# --- 4. DELHI (IST) CLOCK ALIGNMENT ---
 now_utc = datetime.datetime.utcnow()
 now_ist = now_utc + datetime.timedelta(hours=5, minutes=30)
 formatted_date = now_ist.strftime("%A, %B %d, %Y")
 formatted_time = now_ist.strftime("%I:%M %p")
 st.markdown(f"<div class='time-capsule'>⏱️ Delhi IST Track: {formatted_date} | {formatted_time}</div>", unsafe_allow_html=True)
 
-# --- 5. PLATFORM CORE ARCHITECTURE STATES ---
+# --- 5. DATA STATE INTEGRITY ROUTERS ---
 if 'active_window' not in st.session_state: st.session_state.active_window = 1
 if 'survey_score' not in st.session_state: st.session_state.survey_score = "General Wellness Track"
 if 'target_goal' not in st.session_state: st.session_state.target_goal = "Weight Loss Deficit Track"
 
-# PERMANENT SURVEILLANCE DATA CACHE CORES
+# RE-LOCKING SESSIONS PREVENTING INTERMITTENT CRASHES
 if 'p_name' not in st.session_state: st.session_state.p_name = "Riya Sharma"
 if 'p_phone' not in st.session_state: st.session_state.p_phone = "+91 98765 43210"
 if 'p_loc' not in st.session_state: st.session_state.p_loc = "Lucknow, Uttar Pradesh"
@@ -164,7 +154,7 @@ def trigger_alarm_sound():
     sound_url = "https://www.orangefreesounds.com/wp-content/uploads/2022/04/Small-bell-ringing-short-sound-effect.mp3"
     st.audio(sound_url, autoplay=True)
 
-# ACTIVE PROFILE USER HEADS-UP CARD RENDER
+# GLOBAL HEADS-UP CARDディスプレイ
 if st.session_state.active_window > 2:
     st.markdown(f"""
         <div class='patient-vitals-badge'>
@@ -172,7 +162,6 @@ if st.session_state.active_window > 2:
         </div>
     """, unsafe_allow_html=True)
 
-# Trending health & self-love motivational quotes mapped per window baseline
 window_quotes = {
     1: "🌸 'Invest in your health, it pays the best biological interest.' &mdash; Stay Radiant",
     2: "✨ 'Self-care is a non-negotiable prescription. Your recovery journey initializes now.'",
@@ -183,25 +172,15 @@ window_quotes = {
 }
 
 # ==========================================
-# WINDOW 1: PORTAL INTRODUCTION
+# WINDOW 1: PORTAL INTRODUCTION (NEW COZY ART FORMAT)
 # ==========================================
 if st.session_state.active_window == 1:
     st.markdown("<div class='window-container'>", unsafe_allow_html=True)
     
-    st.markdown("""
-        <div style='text-align: center; padding: 25px auto; margin-bottom: 25px;'>
-            <svg width="140" height="140" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="45" fill="#FEF2F2"/>
-                <path d="M50 25C40 38 35 48 35 60C35 70 42 75 50 75C58 75 65 70 65 60C65 48 60 38 50 25Z" fill="#F87171" fill-opacity="0.3"/>
-                <path d="M50 30C52 42 62 48 72 50C62 52 52 58 50 70C48 58 38 52 28 50C38 48 48 42 50 30Z" stroke="#991B1B" stroke-width="2.5" stroke-linejoin="round"/>
-                <circle cx="50" cy="50" r="5" fill="#7F1D1D"/>
-                <path d="M35 70C45 68 55 68 65 70" stroke="#991B1B" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-            <div style='font-family: \"Playfair Display\", serif; font-size: 1.2rem; color: #991B1B; margin-top: 8px; font-weight:700;'>Biomedical Precision Hub</div>
-        </div>
-    """, unsafe_allow_html=True)
+    # 📸 USER REQUESTED: NEW FULL FORMAT AESTHETIC COZY HEALTH & NUTRITION IMAGE
+    st.image("https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=1200", caption="SHEALTH Clinical Culinary & Cozy Botanical Setup", use_container_width=True)
     
-    st.markdown("<h3 style='font-family: \"Playfair Display\", serif; color: #7F1D1D; text-align:center;'>Welcome to your Precision Metabolic Life-Science Environment</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='font-family: \"Playfair Display\", serif; color: #7F1D1D; text-align:center; margin-top:20px;'>Welcome to your Precision Metabolic Life-Science Environment</h3>", unsafe_allow_html=True)
     st.markdown("""
     <p style='text-align: center; font-size:1.05rem; line-height:1.7; max-width:850px; margin: 0 auto; color:#451A1A;'>
     <strong>SHEALTH</strong> is an advanced, high-tech AI-driven nutrient and diet coach wellness architecture engineered to resolve root endocrine variables. 
@@ -354,7 +333,7 @@ elif st.session_state.active_window == 4:
     st.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
-# WINDOW 5: THE 30-DAY CHALLENGE TARGET PLAN (100% Unique Indian Regional Dishes Fixed)
+# WINDOW 5: THE 30-DAY CHALLENGE TARGET PLAN (100% Unique Pan-India Dishes)
 # ==========================================
 elif st.session_state.active_window == 5:
     st.markdown("<div class='window-container'>", unsafe_allow_html=True)
@@ -363,7 +342,7 @@ elif st.session_state.active_window == 5:
     
     st.markdown("""
         <div class='doodle-center-box'>
-            <svg width="55" height="55" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="45" height="45" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#991B1B" fill-opacity="0.15" stroke="#991B1B" stroke-width="1.5"/>
                 <rect x="8" y="7" width="8" height="3" rx="1.5" fill="#991B1B"/>
             </svg>
@@ -386,7 +365,6 @@ elif st.session_state.active_window == 5:
 
     hash_idx = day_num + phase_offset
     
-    # Global Array Lists definition securely housed inside compiler scope
     indian_regions = [
         "Punjab Region", "Kerala Coastline", "Gujarat Plains", "Assam Hills", "Kashmir Valley", 
         "Rajasthan Desert", "West Bengal Delta", "Tamil Nadu Plains", "Goan Coast", "Hyderabad Matrix",
@@ -414,12 +392,6 @@ elif st.session_state.active_window == 5:
         "Kumaoni Herb Fried Eggs", "Haryanvi Ghee Egg White Scramble", "Manipuri Fish Pepper Mash", "Arunachal Steamed Herbs Egg", "Malabar Boiled Egg Podi Wrap"
     ]
 
-    yoga_asanas = [
-        {"title": "Baddha Konasana (Butterfly Alignment Pose)", "desc": "Sit straight, press soles together, gently expand groin fields. Improves pelvic vascular vectors and reproductive indices.", "img": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400"},
-        {"title": "Bhujangasana (Classic Cobra Extension)", "desc": "Lie flat on stomach, lift chest gently using spinal extensors. Lengthens core tracking systems and expands abdominal paths safely.", "img": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400"},
-        {"title": "Sarvangasana (Supported Shoulder Stand)", "desc": "Invert torso fully, supporting hips with upper arms. Massages thyroid hormonal centers to accelerate resting basal efficiency loops.", "img": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400"}
-    ]
-
     v_region = indian_regions[(hash_idx - 1) % len(indian_regions)]
     v_b = veg_breakfast_pool[(hash_idx - 1) % len(veg_breakfast_pool)]
     nv_b = nonveg_breakfast_pool[(hash_idx - 1) % len(nonveg_breakfast_pool)]
@@ -435,6 +407,11 @@ elif st.session_state.active_window == 5:
     else:
         active_workout_plan = workouts_gain[hash_idx % len(workouts_gain)]
         
+    yoga_asanas = [
+        {"title": "Baddha Konasana (Butterfly Alignment Pose)", "desc": "Sit straight, press soles together, gently expand groin fields. Improves pelvic vascular vectors and reproductive indices.", "img": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400"},
+        {"title": "Bhujangasana (Classic Cobra Extension)", "desc": "Lie flat on stomach, lift chest gently using spinal extensors. Lengthens core tracking systems and expands abdominal paths safely.", "img": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400"},
+        {"title": "Sarvangasana (Supported Shoulder Stand)", "desc": "Invert torso fully, supporting hips with upper arms. Massages thyroid hormonal centers to accelerate resting basal efficiency loops.", "img": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400"}
+    ]
     selected_yoga_block = yoga_asanas[hash_idx % len(yoga_asanas)]
     
     st.markdown(f"### 📋 Personal AI Curriculum Mapping Matrix: **Day {day_num} Logs**")
@@ -473,7 +450,7 @@ elif st.session_state.active_window == 5:
     st.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
-# WINDOW 6: COMPLIANCE CORE & GENDER FILTERED TRACKER
+# WINDOW 6: COMPLIANCE CORE & LOG ENVIRONMENT (Bug Fixed Permanently)
 # ==========================================
 elif st.session_state.active_window == 6:
     st.markdown("<div class='window-container'>", unsafe_allow_html=True)
@@ -522,7 +499,7 @@ elif st.session_state.active_window == 6:
         st.progress(min(total_liters / w_baseline, 1.0))
         st.write(f"Logged Status: **{total_liters:.2f} L** out of calculated target **{w_baseline:.1f} L**")
         
-    with h2:
+    with hud2:
         st.markdown("<h4 style='font-family: \"Playfair Display\", serif; color: #7F1D1D;'>📍 Satellite Healthcare Provider Locator Grid</h4>", unsafe_allow_html=True)
         st.info(f"🛰️ Active Geolocation Lock Signal: Verified within **{st.session_state.p_loc}** Perimeter Networks")
         
