@@ -4,7 +4,7 @@ import datetime
 # --- 1. CORE SETUP ---
 st.set_page_config(page_title="SHEALTH | AI Precision Coach", page_icon="🔮", layout="wide")
 
-# --- 2. CSS & AESTHETIC DOODLES ---
+# --- 2. ELITE CSS & DOODLE CANVAS ---
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Plus+Jakarta+Sans&display=swap');
@@ -16,15 +16,16 @@ st.markdown("""
     .window-container { background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(15px); padding: 30px; border-radius: 25px; border: 1px solid #FCA5A5; }
     .pamper-box { background: #F3E8FF; padding: 20px; border-radius: 15px; border-left: 5px solid #7E22CE; margin-top: 15px; }
     .meal-box { background: white; padding: 15px; border-radius: 15px; border-left: 5px solid #F87171; margin-bottom: 10px; }
+    .stButton > button { background: #991B1B; color: white; border-radius: 20px; padding: 10px 25px; border: none; }
     </style>
 """, unsafe_allow_html=True)
 
-# --- 3. STATE & DATA ---
+# --- 3. STATE INITIALIZATION ---
 if 'active_window' not in st.session_state: st.session_state.active_window = 1
-if 'user_data' not in st.session_state: st.session_state.user_data = {"name": "", "weight": 68.0, "height": 162.0, "history": ""}
+if 'p_name' not in st.session_state: st.session_state.p_name = "Riya Sharma"
 if 'p_gender' not in st.session_state: st.session_state.p_gender = "Female Profile"
 
-# --- 4. FEMALE LOGO ---
+# --- 4. BIOLOGICAL FEMALE LOGO ---
 st.markdown("""
     <div class='logo-container'>
         <svg width="80" height="80" viewBox="0 0 100 100">
@@ -39,61 +40,53 @@ st.markdown("""
 
 def jump(w): st.session_state.active_window = w; st.rerun()
 
-# --- 5. WINDOWS ---
+# --- 5. APP WINDOWS ---
+# Window 1: Intro
 if st.session_state.active_window == 1:
     st.markdown("<div class='window-container'>", unsafe_allow_html=True)
-    st.image("https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800")
-    if st.button("Start Journey"): jump(2)
+    st.image("https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800", use_container_width=True)
+    if st.button("Initialize Portal"): jump(2)
     st.markdown("</div>", unsafe_allow_html=True)
 
+# Window 2: Registration
 elif st.session_state.active_window == 2:
     st.markdown("<div class='window-container'>", unsafe_allow_html=True)
-    st.write("### User Registration")
-    st.session_state.user_data['name'] = st.text_input("Name")
-    st.session_state.p_gender = st.radio("Gender", ["Female Profile", "Male Profile"])
-    st.session_state.user_data['weight'] = st.number_input("Weight (kg)", value=68.0)
-    if st.button("Save Profile"): jump(3)
+    st.session_state.p_name = st.text_input("Full Name", value=st.session_state.p_name)
+    st.session_state.p_gender = st.radio("Gender Profile", ["Female Profile", "Male Profile"])
+    if st.button("Lock Profile"): jump(3)
     st.markdown("</div>", unsafe_allow_html=True)
 
+# Window 3: AI Scanner
 elif st.session_state.active_window == 3:
     st.markdown("<div class='window-container'>", unsafe_allow_html=True)
     st.write("### AI Symptom Scanner")
-    st.checkbox("1. Weight fluctuations?")
-    st.checkbox("2. Systemic fatigue?")
-    st.checkbox("3. Hormonal cycles delay?")
-    if st.button("Analyze Results"): jump(4)
+    st.checkbox("Weight fluctuations?")
+    st.checkbox("Systemic fatigue?")
+    if st.button("Analyze"): jump(5)
     st.markdown("</div>", unsafe_allow_html=True)
 
-elif st.session_state.active_window == 4:
-    st.markdown("<div class='window-container'>", unsafe_allow_html=True)
-    st.write(f"### BMI Check for {st.session_state.user_data['name']}")
-    bmi = st.session_state.user_data['weight'] / ((162/100)**2)
-    st.write(f"Your BMI is: {bmi:.1f}")
-    if st.button("Next: View Diet Plan"): jump(5)
-    st.markdown("</div>", unsafe_allow_html=True)
-
+# Window 5: Diet Plan
 elif st.session_state.active_window == 5:
     st.markdown("<div class='window-container'>", unsafe_allow_html=True)
     day = st.slider("Select Day (1-30)", 1, 30, 1)
-    st.markdown("### 📅 30-Day Diet Plan")
-    st.markdown(f"<div class='meal-box'><strong>Day {day} Breakfast:</strong> {'Paneer Oats Cheela' if day%2==0 else 'Sattu Porridge'}</div>", unsafe_allow_html=True)
+    st.markdown(f"### 📅 Day {day} Diet")
+    st.markdown(f"<div class='meal-box'><strong>Breakfast:</strong> {'Paneer Oats Cheela' if day%2==0 else 'Sattu Porridge'}</div>", unsafe_allow_html=True)
     if st.button("Compliance Center"): jump(6)
     st.markdown("</div>", unsafe_allow_html=True)
 
+# Window 6: Tracker & Pamper Kit
 elif st.session_state.active_window == 6:
     st.markdown("<div class='window-container'>", unsafe_allow_html=True)
-    st.write("### 🚨 Adherence Dashboard")
-    # Tracker
-    gl = st.slider("Water Intake (Glasses)", 0, 16, 4)
-    st.progress(gl/12)
+    st.write("### 🚨 Adherence & Comfort")
+    st.slider("Water (Glasses)", 0, 16, 4)
     st.checkbox("💊 Medicine Alarm")
     
     if st.session_state.p_gender == "Female Profile":
-        st.write("#### 📝 Monthly Blues & Pamper")
+        st.write("#### 🌸 Monthly Blues & Pamper")
         st.selectbox("Mood Recorder", ["😊 Happy", "😌 Calm", "😫 Tensed", "🥺 Moody"])
         st.markdown("""
         <div class='pamper-box'>
-            <h4>🌸 The 'Cozy Reds' Pamper Kit</h4>
+            <h4>🌸 Cozy Reds Pamper Kit</h4>
             <ul>
                 <li><strong>Dark Chocolate:</strong> 'Chup-chap rehne ka mann'</li>
                 <li><strong>Sanitary Essentials:</strong> 'Safe-side'</li>
