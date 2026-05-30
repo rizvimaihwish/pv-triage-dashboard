@@ -8,7 +8,7 @@ st.set_page_config(page_title="SHEALTH | AI Precision Coach", page_icon="🩸", 
 # --- 2. ELITE MEDICAL CRIMSON & BOTANICAL GLASSMORPHIC STYLE SHEET ---
 st.markdown("""
     <style>
-    @import url('https://fonts.unsplash.com/css2?family=Alex+Brush&family=Playfair+Display:ital,wght=0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght=0,200..800;1,200..800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Playfair+Display:ital,wght=0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght=0,200..800;1,200..800&display=swap');
     
     /* Immersive Crimson & Rose Mist Clinical Wallpaper Canvas */
     .stApp {
@@ -108,21 +108,23 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# --- 3. INLINE SVG LOGO EMBLEM DESIGN LAYER ---
+# --- 3. INLINE SVG LOGO EMBLEM DESIGN LAYER (NEW ULTRAMINIMAL CLINICAL HEART SHIELD) ---
 st.markdown("""
     <div class='logo-container'>
-        <svg width="95" height="95" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0px 5px 12px rgba(153,27,27,0.3));">
-            <rect x="8" y="8" width="84" height="84" rx="26" fill="white" fill-opacity="0.8"/>
-            <rect x="11" y="11" width="78" height="78" rx="23" stroke="url(#crimson_grad)" stroke-width="2" stroke-dasharray="5 3"/>
-            <path d="M50 24C44 32 32 38 32 54C32 64 40 72 50 72C60 72 68 64 68 54C68 38 56 32 50 24Z" fill="url(#crimson_grad)" fill-opacity="0.15" stroke="url(#crimson_grad)" stroke-width="1.5"/>
-            <path d="M42 46C46 44 54 44 58 46M40 54C45 52 55 52 60 54" stroke="#991B1B" stroke-width="2.5" stroke-linecap="round"/>
-            <rect x="44" y="48" width="12" height="6" rx="3" fill="#7F1D1D"/>
-            <circle cx="50" cy="40" r="3" fill="#B91C1C"/>
+        <svg width="90" height="90" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0px 6px 14px rgba(153,27,27,0.22));">
+            <!-- Frosted Smooth Glass Ring Dynamic Frame -->
+            <circle cx="50" cy="50" r="44" fill="white" fill-opacity="0.85"/>
+            <circle cx="50" cy="50" r="41" stroke="url(#crimson_gold_grad)" stroke-width="1.5" stroke-dasharray="4 4"/>
+            <!-- Elegant Pinterest Line Art: Fusion of Heart and Endocrine Curves -->
+            <path d="M50 32C42 22 28 26 28 42C28 58 45 70 50 74C55 70 72 58 72 42C72 26 58 22 50 32Z" stroke="url(#crimson_gold_grad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Micro Thyroid Cross section details inside core axis -->
+            <path d="M42 46C46 44 54 44 58 46M40 52C45 50 55 50 60 52" stroke="#991B1B" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="50" cy="46" r="3" fill="#7F1D1D"/>
             <defs>
-                <linearGradient id="crimson_grad" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+                <linearGradient id="crimson_gold_grad" x1="28" y1="22" x2="72" y2="74" gradientUnits="userSpaceOnUse">
                     <stop offset="0%" stop-color="#F87171"/>
-                    <stop offset="50%" stop-color="#EF4444"/>
-                    <stop offset="100%" stop-color="#991B1B"/>
+                    <stop offset="60%" stop-color="#B91C1C"/>
+                    <stop offset="100%" stop-color="#7F1D1D"/>
                 </linearGradient>
             </defs>
         </svg>
@@ -152,7 +154,7 @@ if 'p_weight' not in st.session_state: st.session_state.p_weight = 68.0
 if 'p_height' not in st.session_state: st.session_state.p_height = 162.0
 if 'p_gender' not in st.session_state: st.session_state.p_gender = "Female Profile"
 if 'p_history' not in st.session_state: st.session_state.p_history = "None"
-if 'p_reds_last' not in st.session_state: st.session_state.p_reds_last = datetime.date.today() - datetime.timedelta(days=14)
+if 'p_reds_last' not in st.session_state: st.session_state.p_reds_last = now_ist.date() - datetime.timedelta(days=14)
 
 def jump_to_window(window_id):
     st.session_state.active_window = window_id
@@ -170,14 +172,14 @@ if st.session_state.active_window > 2:
         </div>
     """, unsafe_allow_html=True)
 
-# Static window tracking quotes database list
+# Trending health & self-love motivational quotes mapped per window baseline
 window_quotes = {
     1: "🌸 'Invest in your health, it pays the best biological interest.' &mdash; Stay Radiant",
     2: "✨ 'Self-care is a non-negotiable prescription. Your recovery journey initializes now.'",
     3: "🔮 'Listening to your body's subtle bio-signals is the highest form of self-love.'",
     4: "📏 'Vitals are just coordinate data markers; consistency is where transformation lives.'",
     5: "🍱 'Eat to nourish your system cell-by-cell. You are entirely worth the commitment.'",
-    6: "⏰ 'Small daily alarms build ultimate physiological resilience. Keep glowing, queen!'"
+    6: "⏰ 'Small daily adjustments build ultimate physiological resilience. Keep glowing!'"
 }
 
 # ==========================================
@@ -185,7 +187,19 @@ window_quotes = {
 # ==========================================
 if st.session_state.active_window == 1:
     st.markdown("<div class='window-container'>", unsafe_allow_html=True)
-    st.image("https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200", use_container_width=True)
+    
+    st.markdown("""
+        <div style='text-align: center; padding: 25px auto; margin-bottom: 25px;'>
+            <svg width="140" height="140" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="45" fill="#FEF2F2"/>
+                <path d="M50 25C40 38 35 48 35 60C35 70 42 75 50 75C58 75 65 70 65 60C65 48 60 38 50 25Z" fill="#F87171" fill-opacity="0.3"/>
+                <path d="M50 30C52 42 62 48 72 50C62 52 52 58 50 70C48 58 38 52 28 50C38 48 48 42 50 30Z" stroke="#991B1B" stroke-width="2.5" stroke-linejoin="round"/>
+                <circle cx="50" cy="50" r="5" fill="#7F1D1D"/>
+                <path d="M35 70C45 68 55 68 65 70" stroke="#991B1B" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <div style='font-family: \"Playfair Display\", serif; font-size: 1.2rem; color: #991B1B; margin-top: 8px; font-weight:700;'>Biomedical Precision Hub</div>
+        </div>
+    """, unsafe_allow_html=True)
     
     st.markdown("<h3 style='font-family: \"Playfair Display\", serif; color: #7F1D1D; text-align:center;'>Welcome to your Precision Metabolic Life-Science Environment</h3>", unsafe_allow_html=True)
     st.markdown("""
@@ -349,7 +363,7 @@ elif st.session_state.active_window == 5:
     
     st.markdown("""
         <div class='doodle-center-box'>
-            <svg width="45" height="45" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="55" height="55" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#991B1B" fill-opacity="0.15" stroke="#991B1B" stroke-width="1.5"/>
                 <rect x="8" y="7" width="8" height="3" rx="1.5" fill="#991B1B"/>
             </svg>
@@ -372,7 +386,7 @@ elif st.session_state.active_window == 5:
 
     hash_idx = day_num + phase_offset
     
-    # 100% Unique Datapool matrices mapping different regions of India across all 30 variations
+    # Global Array Lists definition securely housed inside compiler scope
     indian_regions = [
         "Punjab Region", "Kerala Coastline", "Gujarat Plains", "Assam Hills", "Kashmir Valley", 
         "Rajasthan Desert", "West Bengal Delta", "Tamil Nadu Plains", "Goan Coast", "Hyderabad Matrix",
@@ -393,11 +407,17 @@ elif st.session_state.active_window == 5:
 
     nonveg_breakfast_pool = [
         "Egg White Scramble Spinach Wrap", "Malabar Egg Roast with Whole Wheat Appam", "Egg Poha Infused with Turmeric", "Assamese Egg Bor with Green Herbs", "Kashmiri Poached Eggs in Light Tomato Broth",
-        "Mughlai Minced Chicken Toast", "Bengali Dim Bhurji with Mustard Hints", "Tamil Nadu Egg Podimas with Curry Leaves", "Goan Egg Cafe-real Wrap", "Hyderabadi Chicken Keema Patties",
-        "Maharashtrian Anda Anda Poha", "Andhra Spicy Egg White Omelet", "Odisha Egg Masala Mash", "Bihari Egg Bhujia with Roasted Gram", "Mangalorean Egg Ghee Roast Whites",
-        "Pahadi Herb Omelet", "Naga Style Smoked Chicken Shreds", "Khasi Egg Scramble", "UP Style Masala Omelet", "Bhopali Minced Egg Toast",
-        "Mizo Egg Stew", "Tripuri Boiled Egg Salad", "Sikkim Chicken Momos (Steamed)", "Jharkhand Desi Chicken Shreds", "Chhattisgarhi Egg Fara",
+        "Mughlai Minced Chicken Toast", "Bengali Dim Bhurji with Mustard Hints", "Tamil Nadu Egg Podimas with Curry Leaves", "Goan Egg Cafe-real Wrap", "Hyderabadi Chicken Keema Pattern Roll",
+        "Maharashtrian Anda Poha Plates", "Andhra Spicy Egg White Omelet", "Odisha Egg Masala Mash", "Bihari Egg Bhujia with Roasted Gram", "Mangalorean Egg Ghee Roast Whites",
+        "Pahadi Herb Baked Omelet", "Naga Style Smoked Chicken Shreds", "Khasi Egg Veg Scramble", "UP Style Masala Omelet Platter", "Bhopali Minced Egg Toast",
+        "Mizo Egg Stew Bowls", "Tripuri Boiled Egg Salad", "Sikkim Chicken Momos (Steamed)", "Jharkhand Desi Chicken Shreds", "Chhattisgarhi Egg Fara",
         "Kumaoni Herb Fried Eggs", "Haryanvi Ghee Egg White Scramble", "Manipuri Fish Pepper Mash", "Arunachal Steamed Herbs Egg", "Malabar Boiled Egg Podi Wrap"
+    ]
+
+    yoga_asanas = [
+        {"title": "Baddha Konasana (Butterfly Alignment Pose)", "desc": "Sit straight, press soles together, gently expand groin fields. Improves pelvic vascular vectors and reproductive indices.", "img": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400"},
+        {"title": "Bhujangasana (Classic Cobra Extension)", "desc": "Lie flat on stomach, lift chest gently using spinal extensors. Lengthens core tracking systems and expands abdominal paths safely.", "img": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400"},
+        {"title": "Sarvangasana (Supported Shoulder Stand)", "desc": "Invert torso fully, supporting hips with upper arms. Massages thyroid hormonal centers to accelerate resting basal efficiency loops.", "img": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400"}
     ]
 
     v_region = indian_regions[(hash_idx - 1) % len(indian_regions)]
@@ -427,7 +447,7 @@ elif st.session_state.active_window == 5:
     with st.expander(f"🍱 Step 2: 4-Course Daily Culinary Layout - Day {day_num} (Click to Pull Up/Down)", expanded=True):
         st.markdown(f"""
         <div class='meal-box'><strong>🍳 Course 1: Breakfast Target ({v_region})</strong><br>Veg Choice: {v_b} prepared clean. <br>Non-Veg Choice: {nv_b} with high bio-available clean protein macros.</div>
-        <div class='meal-box'><strong>🍛 Course 2: Mid-Day Lunch Alignment ({v_region})</strong><br>Veg Path: 1 Bowl Lentil Stew + 1 cup stir-fried seasonal vegetables + 1 Bran Roti. <br>Non-Veg Path: 150g Lemon Grilled Chicken Breast served alongside fresh green leafy salad.</div>
+        <div class='meal-box'><strong>🍛 Course 2: Mid-Day Lunch Alignment ({v_region})</strong><br>Veg Path: 1 Bowl Lentil Stew + 1 cup stir-fried seasonal vegetables + 1 Bran Roti. <br>Non-Veg Path: 150g {nv_b} served alongside fresh green leafy salad.</div>
         <div class='meal-box'><strong>🥗 Course 3: Evening Adrenal Vitality Snack</strong><br>1 Cup Spiced Ayurvedic Kadha Tea paired with a small palmful of roasted crunchy Makhanas.</div>
         <div class='meal-box'><strong>🌙 Course 4: Restorative Night Repair Dinner</strong><br>Veg Path: Soft textured tofu vegetable hash cooked in minimal ghee. <br>Non-Veg Path: 120g Seared salmon fish paired with charred broccoli strings.</div>
         """, unsafe_allow_html=True)
@@ -464,8 +484,7 @@ elif st.session_state.active_window == 6:
     hud1, hud2 = st.columns(2)
     with hud1:
         if st.session_state.p_gender == "Female Profile":
-            today_date = datetime.date.today()
-            days_since_last_reds = (today_date - st.session_state.p_reds_last).days
+            days_since_last_reds = (now_ist.date() - st.session_state.p_reds_last).days
             days_until_next_reds = (28 - (days_since_last_reds % 28)) % 28
             
             st.markdown("<h4 style='font-family: \"Playfair Display\", serif; color: #7F1D1D;'>🔒 Private Dynamic 'Monthly Reds' Forecast</h4>", unsafe_allow_html=True)
@@ -475,7 +494,7 @@ elif st.session_state.active_window == 6:
                 <p style='font-size:2rem; font-weight:800; color:#7F1D1D; margin:10px 0;'>{days_until_next_reds} Days Remaining</p>
                 <p style='font-size:0.9rem; color:#451A1A; margin:0;'>
                     <strong>AI Tracker Advice:</strong> 
-                    {"Prioritize cellular recovery and include roasted Makhana to balance micro-cravings safely as vectors shift." if days_until_next_reds <= 7 else "Energy parameters are stable. Optimal window to execute Alternate Squat progressions."}
+                    {"Prioritize cellular recovery and include roasted makhana to balance micro-cravings safely as vectors shift." if days_until_next_reds <= 7 else "Energy parameters are stable. Optimal window to execute Alternate Squat progressions."}
                 </p>
             </div>
             """, unsafe_allow_html=True)
@@ -539,6 +558,7 @@ elif st.session_state.active_window == 6:
     
     st.markdown("<br>", unsafe_allow_html=True)
     if st.button("↩️ Reset Session"):
-        jump_to_window(1)
+        st.session_state.active_window = 1
+        st.rerun()
     st.markdown(f"<div class='trending-quote-banner'>{window_quotes[6]}</div>", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
