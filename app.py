@@ -187,7 +187,7 @@ if st.session_state.active_window == 1:
     st.markdown("<h4 style='font-family: \"Playfair Display\", serif; color: #7F1D1D;'>🎥 Daily Clinical Coaching Segment</h4>", unsafe_allow_html=True)
     v1, v2 = st.columns([1.6, 1])
     with v1:
-        st.video("https://www.youtube.com/watch?v=ScZs7L0_S38")
+       st.video("https://www.youtube.com/watch?v=T45Ca2VNYpQ")
     with v2:
         st.markdown("<h5 style='color: #7F1D1D; font-family: \"Playfair Display\", serif;'>Endocrine Pacing Models</h5>", unsafe_allow_html=True)
         st.write("Explore how steady adjustments in daily complex carbohydrate hierarchies stabilize internal metabolic curves. Learn to map low-impact skeletal movements to safely process high system loads without inducing central fatigue lines.")
@@ -444,13 +444,14 @@ elif st.session_state.active_window == 5:
     st.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
-# WINDOW 6: COMPLIANCE CORE & LOG ENVIRONMENT (Bug Fixed Permanently)
+# WINDOW 6: COMPLIANCE CORE & LOG ENVIRONMENT
 # ==========================================
 elif st.session_state.active_window == 6:
     st.markdown("<div class='window-container'>", unsafe_allow_html=True)
     st.markdown("<h3 style='font-family: \"Playfair Display\", serif; color: #7F1D1D;'>🚨 Real-time Adherence Dashboards & Regional Provider Locator</h3>", unsafe_allow_html=True)
     
     w_baseline = float(st.session_state.p_weight * 0.035)
+    icon_style = "width:24px; height:24px; vertical-align: middle; margin-right: 8px;"
     
     hud1, hud2 = st.columns(2)
     with hud1:
@@ -486,7 +487,25 @@ elif st.session_state.active_window == 6:
         cal_index = {"1 Wheat Chapati": "85 kcal", "100g Paneer Bhurji": "190 kcal", "1 Bowl Moong Dal Khichdi": "220 kcal", "1 Whole Boiled Egg": "78 kcal", "100g Chicken Breast (Grilled)": "165 kcal", "1 Roasted Papad": "35 kcal", "1 Bowl Green Sabzi": "95 kcal"}
         st.code(f"Database Caloric Core Value: {cal_index[f_select]}")
         
+        # --- NEW: INDUSTRIAL LEVEL MOOD & PAMPER HUB ---
         st.markdown("---")
+        st.markdown(f"#### <svg style='{icon_style}' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'></path></svg> Mood-Aware Pamper Hub", unsafe_allow_html=True)
+        
+        mood_data = {
+            "😊 Happy": ["Gratitude Journaling", "Post a positive update", "Healthy Smoothie"],
+            "😌 Calm": ["Read a book", "Chamomile Herbal Tea", "Light Stretching"],
+            "😫 Tensed": ["Dark Chocolate (Magnesium)", "Warm Water Bottle", "Deep Breathing Exercises"],
+            "🥺 Moody": ["Sanitary Essentials", "Warm Blanket", "Comfort Food"]
+        }
+        
+        selected_mood = st.selectbox("How is your system feeling today?", list(mood_data.keys()))
+        
+        with st.expander(f"✨ Pamper Bucket for {selected_mood.split()[1]} Mood", expanded=True):
+            for item in mood_data[selected_mood]:
+                st.markdown(f"**🎀 {item}**")
+        
+        st.markdown("---")
+        
         st.markdown("<h4 style='font-family: \"Playfair Display\", serif; color: #7F1D1D;'>🥛 Hydration Multiplier Tracker Progress</h4>", unsafe_allow_html=True)
         gl_drunk = st.slider("Glasses consumed today (250ml units):", 0, 16, 4)
         total_liters = gl_drunk * 0.25
@@ -503,7 +522,7 @@ elif st.session_state.active_window == 6:
             <strong>🏥 Apollo Diagnostic Healthcare Center & Endocrine Hub</strong><br>
             Location Ward Coordinates: Regional Peripheral Ward, {st.session_state.p_loc.split(',')[0]} • Specialized Clinical Testing Wing Active
         </div>
-        <div class='provider-box'>
+        <div class='provider-box' style='margin-top: 10px;'>
             <strong>💊 Apollo Pharmacy 24x7 Retail Counter Outlets</strong><br>
             Distance Matrix: 0.7 km away • Synced with state pharmacist prescription networks for specialized hormonal therapeutics
         </div>
