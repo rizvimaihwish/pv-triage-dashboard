@@ -4,6 +4,12 @@ import datetime
 
 # --- 1. CORE SYSTEM INITIALIZATION ---
 st.set_page_config(page_title="SHEALTH | AI Precision Coach", page_icon="🔮", layout="wide")
+# Force scroll to top on every rerender
+st.markdown("""
+    <script>
+        window.scrollTo(0, 0);
+    </script>
+""", unsafe_allow_html=True)
 
 # --- 2. ELITE CLINICAL CRIMSON & PINTEREST BOTANICAL DOODLE CANVAS ---
 st.markdown("""
@@ -60,14 +66,25 @@ st.markdown("""
         max-width: 500px; margin: 0 auto 25px auto; box-shadow: 0 4px 12px rgba(153,27,27,0.05);
     }
     
-    /* Frosted Amethyst-Garnet Glassmorphic Core Panels */
+    /* Clean Fade Animation */
+    @keyframes fadeIn { 
+        from { opacity: 0; } 
+        to { opacity: 1; } 
+    }
+
     .window-container { 
         background-color: rgba(255, 255, 255, 0.74) !important; 
         backdrop-filter: blur(22px) saturate(140%); 
-        border-radius: 30px; padding: 40px; 
+        border-radius: 30px; 
+        padding: 40px; 
         border: 1px solid rgba(254, 202, 202, 0.6); 
         box-shadow: 0 22px 50px rgba(185, 28, 28, 0.12); 
-        margin-bottom: 30px; position: relative;
+        margin-top: 10px; 
+        margin-bottom: 30px;
+        position: relative;
+        /* Strictly fade, no movement */
+        animation: fadeIn 0.5s ease-in-out;
+        opacity: 1;
     }
     
     .meal-box { background-color: rgba(255, 255, 255, 0.92); border-radius: 16px; padding: 20px; margin-bottom: 15px; border-left: 5px solid #F87171; box-shadow: 0 4px 15px rgba(153, 27, 27, 0.03); }
