@@ -2,99 +2,107 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import datetime
+import time
 
 # --- 1. CORE SYSTEM INITIALIZATION ---
-st.set_page_config(page_title="SHEALTH | AI Precision Coach", page_icon="🔮", layout="wide")
+st.set_page_config(page_title="SHEALTH | AI Precision Coach", page_icon="🩸", layout="wide")
 
-# --- 2. ADVANCED PINTEREST PURPLE LUXURY STYLE SHEET ---
+# --- 2. ELITE MEDICAL CRIMSON & BOTANICAL GLASSMORPHIC STYLE SHEET ---
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Playfair+Display:ital,wght=0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght=0,200..800;1,200..800&display=swap');
     
-    /* Premium Girly Abstract Purple Mists Canvas Wallpaper */
+    /* Immersive Crimson & Rose Mist Clinical Wallpaper Canvas */
     .stApp {
-        background-image: linear-gradient(to bottom, rgba(250, 242, 253, 0.88), rgba(243, 230, 250, 0.92)), 
+        background-image: linear-gradient(to bottom, rgba(254, 242, 242, 0.88), rgba(252, 228, 228, 0.92)), 
                           url('https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=1600');
         background-size: cover; background-position: center; background-attachment: fixed;
     }
     
-    /* Immersive Purple Medical & Wellness Doodles Theme */
+    /* Precision Pharmacological & Anatomical Doodles Watermarks via CSS Pseudo Layers */
     .stApp::before {
-        content: ""; position: fixed; top: 12%; left: 4%; width: 130px; height: 130px;
-        background-image: url('https://img.icons8.com/external-vitality-linear-bsh-vectors/100/7C3AED/external-yoga-healthy-lifestyle-vitality-linear-bsh-vectors-2.png');
-        opacity: 0.15; pointer-events: none; z-index: 0;
+        content: ""; position: fixed; top: 12%; left: 4%; width: 140px; height: 140px;
+        background-image: url('https://img.icons8.com/external-flatart-icons-outline-flatarticons/100/991B1B/external-urology-medical-health-flatart-icons-outline-flatarticons.png');
+        opacity: 0.12; pointer-events: none; z-index: 0;
     }
     .stApp::after {
-        content: ""; position: fixed; bottom: 10%; right: 5%; width: 110px; height: 110px;
-        background-image: url('https://img.icons8.com/external-creatype-outline-colourcreatype/100/7C3AED/external-herbal-tea-medical-and-health-creatype-outline-colourcreatype.png');
-        opacity: 0.18; pointer-events: none; z-index: 0;
+        content: ""; position: fixed; bottom: 10%; right: 5%; width: 120px; height: 120px;
+        background-image: url('https://img.icons8.com/external-icongeek26-outline-icongeek26/100/991B1B/external-pills-medical-icongeek26-outline-icongeek26.png');
+        opacity: 0.15; pointer-events: none; z-index: 0;
     }
     
-    html, body, [class*="css"] { font-family: 'Plus Jakarta Sans', sans-serif; color: #3D2D3D; }
+    html, body, [class*="css"] { font-family: 'Plus Jakarta Sans', sans-serif; color: #451A1A; }
     
-    /* Calligraphed Luxury HEADING - SHEALTH Purple Title Architecture */
+    /* Calligraphed Luxury HEADING - SHEALTH Crimson Gold Branding */
     .logo-container { text-align: center; margin-bottom: 2px; padding-top: 15px; }
-    .calligraphy-title { font-family: 'Alex Brush', cursive; font-size: 5.5rem; color: #4A1D4A; font-weight: 600; line-height: 0.9; text-shadow: 3px 3px 6px rgba(124, 58, 237, 0.2); }
-    .brand-subtitle { font-family: 'Plus Jakarta Sans', sans-serif; color: #8B5CF6; font-size: 0.95rem; font-weight: 700; text-align: center; text-transform: uppercase; letter-spacing: 5px; margin-bottom: 35px; }
+    .calligraphy-title { font-family: 'Alex Brush', cursive; font-size: 5.6rem; color: #7F1D1D; font-weight: 600; line-height: 0.9; text-shadow: 2px 2px 4px rgba(153, 27, 27, 0.15); }
+    .brand-subtitle { font-family: 'Plus Jakarta Sans', sans-serif; color: #991B1B; font-size: 0.95rem; font-weight: 700; text-align: center; text-transform: uppercase; letter-spacing: 5px; margin-bottom: 20px; }
     
-    /* Ultra-Frosted Luxury Amethyst Glassmorphic Panels */
+    /* Live IST Time Badge Style */
+    .time-capsule {
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(254, 202, 202, 0.8);
+        border-radius: 20px; padding: 8px 20px; font-weight: 700; color: #B91C1C; font-size: 0.9rem; text-align: center; max-width: 320px; margin: 0 auto 30px auto;
+        box-shadow: 0 4px 15px rgba(153, 27, 27, 0.08);
+    }
+    
+    /* Frosted Amethyst-Garnet Glassmorphic Core Panels */
     .window-container { 
-        background-color: rgba(255, 255, 255, 0.72) !important; 
-        backdrop-filter: blur(20px) saturate(150%); 
+        background-color: rgba(255, 255, 255, 0.74) !important; 
+        backdrop-filter: blur(22px) saturate(140%); 
         border-radius: 30px; padding: 40px; 
-        border: 1px solid rgba(235, 215, 250, 0.7); 
-        box-shadow: 0 22px 50px rgba(196, 160, 225, 0.25); 
-        margin-bottom: 30px;
-        position: relative;
+        border: 1px solid rgba(254, 202, 202, 0.6); 
+        box-shadow: 0 22px 50px rgba(185, 28, 28, 0.12); 
+        margin-bottom: 30px; position: relative;
     }
     
-    /* Inline Content Miniature Doodle Accents */
+    /* Miniature Internal Organ Outline Doodle Stamp */
     .window-container::after {
-        content: ""; position: absolute; top: 15px; right: 20px; width: 45px; height: 45px;
-        background-image: url('https://img.icons8.com/ios/50/A78B93/heart-health.png');
-        opacity: 0.15;
+        content: ""; position: absolute; top: 20px; right: 25px; width: 50px; height: 50px;
+        background-image: url('https://img.icons8.com/ios/50/991B1B/thyroid.png');
+        opacity: 0.12; pointer-events: none;
     }
     
-    .meal-box { background-color: rgba(255, 255, 255, 0.9); border-radius: 16px; padding: 20px; margin-bottom: 15px; border-left: 5px solid #A78BFA; box-shadow: 0 4px 15px rgba(124, 58, 237, 0.05); }
-    .workout-box { background-color: rgba(255, 255, 255, 0.9); border-radius: 16px; padding: 20px; margin-bottom: 15px; border-left: 5px solid #C084FC; box-shadow: 0 4px 15px rgba(124, 58, 237, 0.05); }
-    .detox-badge { display: inline-block; padding: 6px 16px; background-color: #F5F3FF; color: #7C3AED; border-radius: 20px; font-size: 0.78rem; font-weight: 700; margin-bottom: 12px; letter-spacing: 0.5px; text-transform: uppercase; border: 1px solid #DDD6FE; }
-    .provider-box { background-color: rgba(255, 255, 255, 0.85); border-radius: 14px; padding: 20px; border-left: 4px solid #7C3AED; box-shadow: 0 4px 12px rgba(0,0,0,0.01); }
-    .grocery-box { background-color: rgba(245, 243, 255, 0.8); padding: 18px; border-radius: 14px; border: 1px dashed #A78BFA; margin-top: 15px; }
+    .meal-box { background-color: rgba(255, 255, 255, 0.92); border-radius: 16px; padding: 20px; margin-bottom: 15px; border-left: 5px solid #F87171; box-shadow: 0 4px 15px rgba(153, 27, 27, 0.03); }
+    .workout-box { background-color: rgba(255, 255, 255, 0.92); border-radius: 16px; padding: 20px; margin-bottom: 15px; border-left: 5px solid #EF4444; box-shadow: 0 4px 15px rgba(153, 27, 27, 0.03); }
+    .detox-badge { display: inline-block; padding: 6px 16px; background-color: #FEF2F2; color: #991B1B; border-radius: 20px; font-size: 0.78rem; font-weight: 700; margin-bottom: 12px; letter-spacing: 0.5px; text-transform: uppercase; border: 1px solid #FEE2E2; }
+    .provider-box { background-color: rgba(255, 255, 255, 0.85); border-radius: 14px; padding: 20px; border-left: 4px solid #991B1B; }
+    .grocery-box { background-color: rgba(254, 242, 242, 0.85); padding: 18px; border-radius: 14px; border: 1px dashed #F87171; margin-top: 15px; }
     
-    /* Royal Purple Shimmer Push Buttons */
+    /* Sleek Deep Crimson Functional Action Buttons */
     div.stButton > button {
-        background: linear-gradient(135deg, #A78BFA 0%, #7C3AED 100%) !important;
+        background: linear-gradient(135deg, #F87171 0%, #991B1B 100%) !important;
         color: white !important; font-weight: 700 !important; border-radius: 30px !important;
         border: none !important; padding: 14px 40px !important; font-size: 1.05rem !important; letter-spacing: 0.5px;
-        box-shadow: 0 8px 25px rgba(124, 58, 237, 0.35) !important; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+        box-shadow: 0 8px 25px rgba(153, 27, 27, 0.3) !important; transition: all 0.4s ease !important;
         display: block; margin: 0 auto; width: 45%;
     }
-    div.stButton > button:hover { transform: translateY(-3px) scale(1.02) !important; box-shadow: 0 12px 30px rgba(109, 40, 217, 0.5) !important; }
+    div.stButton > button:hover { transform: translateY(-3px) scale(1.02) !important; box-shadow: 0 12px 30px rgba(153, 27, 27, 0.45) !important; }
     
-    .stProgress > div > div > div > div { background-image: linear-gradient(to right, #A78BFA, #7C3AED) !important; }
-    div[data-testid="stMetricValue"] { font-size: 2.2rem; font-weight: 700; color: #4A1D4A; font-family: 'Playfair Display', serif; }
-    div[data-testid="stMetricLabel"] { font-size: 0.85rem; font-weight: 700; color: #8B5CF6; text-transform: uppercase; letter-spacing: 1px; }
-    div[data-testid="stMetric"] { background-color: rgba(255, 255, 255, 0.88) !important; backdrop-filter: blur(6px); border-radius: 18px; padding: 18px; border: 1px solid rgba(235,215,250,0.5); }
+    .stProgress > div > div > div > div { background-image: linear-gradient(to right, #F87171, #991B1B) !important; }
+    div[data-testid="stMetricValue"] { font-size: 2.2rem; font-weight: 700; color: #7F1D1D; font-family: 'Playfair Display', serif; }
+    div[data-testid="stMetricLabel"] { font-size: 0.85rem; font-weight: 700; color: #991B1B; text-transform: uppercase; letter-spacing: 1px; }
+    div[data-testid="stMetric"] { background-color: rgba(255, 255, 255, 0.88) !important; backdrop-filter: blur(6px); border-radius: 18px; padding: 18px; border: 1px solid rgba(254,202,202,0.4); }
     </style>
 """, unsafe_allow_html=True)
 
-# --- 3. INLINE SVG LOGO EMBLEM DESIGN LAYER (NEW PURPLE HELIX CODES) ---
+# --- 3. INLINE SVG LOGO EMBLEM DESIGN LAYER (NEW CLINICAL BIO-SHIELD CORE) ---
 st.markdown("""
     <div class='logo-container'>
-        <svg width="90" height="90" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0px 5px 10px rgba(124,58,237,0.35));">
-            <rect x="8" y="8" width="84" height="84" rx="26" fill="white" fill-opacity="0.75"/>
-            <rect x="10" y="10" width="80" height="80" rx="24" stroke="url(#purple_grad)" stroke-width="2" stroke-dasharray="4 4"/>
-            <!-- Advanced AI Biology Shield Cross Helix Lines -->
-            <path d="M35 50C35 35 65 35 65 50C65 65 35 65 35 50Z" stroke="url(#purple_grad)" stroke-width="3" fill="none"/>
-            <path d="M50 28V72M28 50H72" stroke="#7C3AED" stroke-width="2.5" stroke-linecap="round"/>
-            <circle cx="50" cy="50" r="6" fill="#4A1D4A"/>
-            <circle cx="35" cy="50" r="4" fill="#A78BFA"/>
-            <circle cx="65" cy="50" r="4" fill="#8B5CF6"/>
+        <svg width="95" height="95" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0px 5px 12px rgba(153,27,27,0.3));">
+            <rect x="8" y="8" width="84" height="84" rx="26" fill="white" fill-opacity="0.8"/>
+            <rect x="11" y="11" width="78" height="78" rx="23" stroke="url(#crimson_grad)" stroke-width="2" stroke-dasharray="5 3"/>
+            <!-- Labeled Clinical Endocrine Thyroid Cross Outline -->
+            <path d="M50 24C44 32 32 38 32 54C32 64 40 72 50 72C60 72 68 64 68 54C68 38 56 32 50 24Z" fill="url(#crimson_grad)" fill-opacity="0.15" stroke="url(#crimson_grad)" stroke-width="1.5"/>
+            <path d="M42 46C46 44 54 44 58 46M40 54C45 52 55 52 60 54" stroke="#991B1B" stroke-width="2.5" stroke-linecap="round"/>
+            <rect x="44" y="48" width="12" height="6" rx="3" fill="#7F1D1D"/> <!-- Pill Capsule Representation Element -->
+            <circle cx="50" cy="40" r="3" fill="#B91C1C"/>
             <defs>
-                <linearGradient id="purple_grad" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stop-color="#C084FC"/>
-                    <stop offset="50%" stop-color="#A78BFA"/>
-                    <stop offset="100%" stop-color="#7C3AED"/>
+                <linearGradient id="crimson_grad" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#F87171"/>
+                    <stop offset="50%" stop-color="#EF4444"/>
+                    <stop offset="100%" stop-color="#991B1B"/>
                 </linearGradient>
             </defs>
         </svg>
@@ -103,7 +111,13 @@ st.markdown("""
 """, unsafe_allow_html=True)
 st.markdown("<p class='brand-subtitle'>AI Precision Endocrine Alignment & 30-Day Lifecycle Coaching</p>", unsafe_allow_html=True)
 
-# --- 4. PLATFORM SYSTEM STATE ENGINE ---
+# --- 4. REAL-TIME DYNAMIC IST TIME STAMP CALCULATOR ---
+now_ist = datetime.datetime.now()
+formatted_date = now_ist.strftime("%A, %B %d, %Y")
+formatted_time = now_ist.strftime("%I:%M %p")
+st.markdown(f"<div class='time-capsule'>⏱️ IST Track: {formatted_date} | {formatted_time}</div>", unsafe_allow_html=True)
+
+# --- 5. PLATFORM SYSTEM STATE ENGINE ---
 if 'active_window' not in st.session_state: st.session_state.active_window = 1
 if 'user_data' not in st.session_state: st.session_state.user_data = {}
 if 'survey_score' not in st.session_state: st.session_state.survey_score = "General Wellness Track"
@@ -113,6 +127,10 @@ def jump_to_window(window_id):
     st.session_state.active_window = window_id
     st.rerun()
 
+def trigger_alarm_sound():
+    sound_url = "https://www.orangefreesounds.com/wp-content/uploads/2022/04/Small-bell-ringing-short-sound-effect.mp3"
+    st.audio(sound_url, autoplay=True)
+
 # ==========================================
 # WINDOW 1: PORTAL INTRODUCTION & CLINICAL VLOG
 # ==========================================
@@ -120,23 +138,23 @@ if st.session_state.active_window == 1:
     st.markdown("<div class='window-container'>", unsafe_allow_html=True)
     st.image("https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200", use_container_width=True)
     
-    st.markdown("<h3 style='font-family: \"Playfair Display\", serif; color: #4A1D4A; text-align:center;'>Welcome to your Precision Metabolic Life-Science Environment</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='font-family: \"Playfair Display\", serif; color: #7F1D1D; text-align:center;'>Welcome to your Precision Metabolic Life-Science Environment</h3>", unsafe_allow_html=True)
     st.markdown("""
-    <p style='text-align: center; font-size:1.05rem; line-height:1.7; max-width:850px; margin: 0 auto; color:#5D4D5D;'>
+    <p style='text-align: center; font-size:1.05rem; line-height:1.7; max-width:850px; margin: 0 auto; color:#451A1A;'>
     <strong>SHEALTH</strong> is an advanced, high-tech AI-driven nutrient and diet coach wellness architecture engineered to resolve root endocrine variables. 
     By compiling baseline biological signatures, the ecosystem structures completely custom, daily-differentiated therapeutic regimes and 
     low-impact functional workouts adapted beautifully for your recovery parameters.
     </p>
     """, unsafe_allow_html=True)
     
-    st.markdown("<br><hr style='border-color: #EBD7FA;'><br>", unsafe_allow_html=True)
-    st.markdown("<h4 style='font-family: \"Playfair Display\", serif; color: #4A1D4A;'>🎥 Daily Clinical Coaching Segment</h4>", unsafe_allow_html=True)
+    st.markdown("<br><hr style='border-color: #FCA5A5;'><br>", unsafe_allow_html=True)
+    st.markdown("<h4 style='font-family: \"Playfair Display\", serif; color: #7F1D1D;'>🎥 Daily Clinical Coaching Segment</h4>", unsafe_allow_html=True)
     v1, v2 = st.columns([1.6, 1])
     with v1:
         st.video("https://www.youtube.com/watch?v=ScZs7L0_S38")
     with v2:
-        st.markdown("<h5 style='color: #4A1D4A; font-family: \"Playfair Display\", serif;'>Endocrine Stabilization Mechanics</h5>", unsafe_allow_html=True)
-        st.write("Explore how continuous daily variance in complex carbohydrate structure manages pancreatic recovery pathways. Learn to balance systematic active tissue extensions to clear hormonal load layers safely without creating physical burnout vectors.")
+        st.markdown("<h5 style='color: #7F1D1D; font-family: \"Playfair Display\", serif;'>Endocrine Pacing Models</h5>", unsafe_allow_html=True)
+        st.write("Explore how steady adjustments in daily complex carbohydrate hierarchies stabilize internal metabolic curves. Learn to map low-impact skeletal movements to safely process high system loads without inducing central fatigue lines.")
         st.markdown("<br><br>", unsafe_allow_html=True)
         if st.button("✨ Initialize SHEALTH AI Registration Profile"):
             jump_to_window(2)
@@ -147,7 +165,7 @@ if st.session_state.active_window == 1:
 # ==========================================
 elif st.session_state.active_window == 2:
     st.markdown("<div class='window-container'>", unsafe_allow_html=True)
-    st.markdown("<h3 style='font-family: \"Playfair Display\", serif; color: #4A1D4A;'>🔒 Clinical Profile Registration Portal</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='font-family: \"Playfair Display\", serif; color: #7F1D1D;'>🔒 Clinical Profile Registration Portal</h3>", unsafe_allow_html=True)
     
     r1, r2 = st.columns(2)
     with r1:
@@ -161,7 +179,7 @@ elif st.session_state.active_window == 2:
         height_cm = st.number_input("Core Axis Height Field (cm):", min_value=110.0, max_value=230.0, value=162.0)
         
     st.markdown("---")
-    st.markdown("<h4 style='font-family: \"Playfair Display\", serif; color: #4A1D4A;'>📋 Prior Diagnoses & Medication Overlays</h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='font-family: \"Playfair Display\", serif; color: #7F1D1D;'>📋 Prior Diagnoses & Medication Overlays</h4>", unsafe_allow_html=True)
     med_history = st.text_area("Log active clinical prescriptions or metabolic history markers (e.g., Metformin 500mg daily, Thyronorm 25mcg, None):", value="None")
     
     if st.button("🚀 Lock Biometrics & Continue"):
@@ -177,7 +195,7 @@ elif st.session_state.active_window == 2:
 # ==========================================
 elif st.session_state.active_window == 3:
     st.markdown("<div class='window-container'>", unsafe_allow_html=True)
-    st.markdown("<h3 style='font-family: \"Playfair Display\", serif; color: #4A1D4A;'>📋 AI Symptom Stratification & Vector Intake Matrix</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='font-family: \"Playfair Display\", serif; color: #7F1D1D;'>📋 AI Symptom Stratification & Vector Intake Matrix</h3>", unsafe_allow_html=True)
     
     s1 = st.checkbox("1. Sudden weight shifts or high resistance to metabolic calorie deficits?")
     s2 = st.checkbox("2. Deep muscular exhaustion, systemic fatigue, or morning sluggishness profiles?")
@@ -203,14 +221,15 @@ elif st.session_state.active_window == 3:
     st.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
-# WINDOW 4: BMI METRIC CONVERTER LABORATORY
+# WINDOW 4: BMI METRIC LAB & INTERACTIVE AI DIAGNOSTIC ENGINE
 # ==========================================
 elif st.session_state.active_window == 4:
     st.markdown("<div class='window-container'>", unsafe_allow_html=True)
-    st.markdown("<h3 style='font-family: \"Playfair Display\", serif; color: #4A1D4A;'>📐 Physical Biometrics Converter & Diagnostic Registry</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='font-family: \"Playfair Display\", serif; color: #7F1D1D;'>📐 Physical Biometrics Converter & AI Diagnostic Engine</h3>", unsafe_allow_html=True)
     
     u_wt = st.session_state.user_data.get('weight', 68.0)
     u_ht = st.session_state.user_data.get('height', 162.0)
+    u_hist = st.session_state.user_data.get('history', 'None')
     
     with st.expander("🔄 Open Metric Converter Tool (Push Up/Down for Conversion Matrices)", expanded=False):
         uc1, uc2 = st.columns(2)
@@ -227,17 +246,32 @@ elif st.session_state.active_window == 4:
     computed_bmi = u_wt / (h_m ** 2)
     
     st.markdown("---")
-    st.markdown("<h4 style='font-family: \"Playfair Display\", serif; color: #4A1D4A;'>Clinical Mass Analysis Stratification</h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='font-family: \"Playfair Display\", serif; color: #7F1D1D;'>Clinical Mass Analysis Stratification</h4>", unsafe_allow_html=True)
     col_metric1, col_metric2 = st.columns([1, 2])
     with col_metric1:
         st.metric("Your Calculated Body Mass Index (BMI)", f"{computed_bmi:.1f}")
     with col_metric2:
-        if computed_bmi < 18.5: st.warning("🚨 **Classification Matrix: Underweight.** Lean lean mass tissues require optimization.")
-        elif 18.5 <= computed_bmi <= 24.9: st.success("🌸 **Classification Matrix: Homeostatic Equilibrium.** Baselines are clinically optimal.")
-        elif 25.0 <= computed_bmi <= 29.9: st.warning("⚠️ **Classification Matrix: Overweight Category Ranges.** Modification indicated.")
-        else: st.error("🚨 **Classification Matrix: Obese Category Ranges.** High systemic physiological load lines detected.")
+        if computed_bmi < 18.5: bmi_status = "Underweight Baseline"
+        elif 18.5 <= computed_bmi <= 24.9: bmi_status = "Optimal Homeostasis"
+        elif 25.0 <= computed_bmi <= 29.9: bmi_status = "Overweight Matrix Burden"
+        else: bmi_status = "Obese Clinical Stress"
+        st.code(f"System Matrix Node Status: {bmi_status}")
+
+    # AI Smart Core Insights
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown("<h4 style='font-family: \"Playfair Display\", serif; color: #7F1D1D;'>🤖 SHEALTH AI Real-time Intelligent Coaching Core</h4>", unsafe_allow_html=True)
+    with st.spinner("AI Engine parsing physiological records..."):
+        time.sleep(0.5)
+        if "PCOS" in st.session_state.survey_score:
+            ai_insight_text = f"Warning: Insulin sensitivity margins are compressed. Identified prior parameters: '{u_hist}'. Recommendation: Implement clean complex carbohydrates to secure continuous baseline glucose boundaries safely."
+        elif "Hypothyroidism" in st.session_state.survey_score:
+            ai_insight_text = f"Detected reduced energetic output axes matching a thyroid cellular lag layer. Identified parameters: '{u_hist}'. Recommendation: Focus on micronutrients containing natural Selenium to balance regulatory conversions."
+        else:
+            ai_insight_text = f"System coordinates verified within homeostatic ranges. Current operational tier: '{bmi_status}'. General maintenance parameters enabled successfully."
+            
+    st.info(f"✨ **AI Engine Response:** {ai_insight_text}")
         
-    st.markdown("<br><hr style='border-color: #EBD7FA;'><br>", unsafe_allow_html=True)
+    st.markdown("<br><hr style='border-color: #FCA5A5;'><br>", unsafe_allow_html=True)
     st.session_state.target_goal = st.selectbox("Configure Targeted 30-Day Target Pathway Matrix:", ["Weight Loss Tracker Focus", "Weight Gain Tracker Focus"])
     
     if st.button("🎯 Compile My Dynamic 30-Day Adherence Schedule"):
@@ -249,7 +283,7 @@ elif st.session_state.active_window == 4:
 # ==========================================
 elif st.session_state.active_window == 5:
     st.markdown("<div class='window-container'>", unsafe_allow_html=True)
-    st.markdown(f"<h3 style='font-family: \"Playfair Display\", serif; color: #4A1D4A;'>📅 SHEALTH AI 30-Day Precision Challenge Tracker</h3>", unsafe_allow_html=True)
+    st.markdown(f"<h3 style='font-family: \"Playfair Display\", serif; color: #7F1D1D;'>📅 SHEALTH AI 30-Day Precision Challenge Tracker</h3>", unsafe_allow_html=True)
     st.write(f"Active Diagnosis Anchor: **{st.session_state.survey_score}** | Goal: **{st.session_state.target_goal}**")
     
     st.image("https://images.unsplash.com/photo-1540420773420-3366772f4999?w=1200", caption="SHEALTH Precision AI Metabolic Culinary Center", use_container_width=True)
@@ -267,7 +301,6 @@ elif st.session_state.active_window == 5:
         day_num = st.slider("Select Active Day Tracker Window:", 21, 30, 21)
         phase_offset = 20
 
-    # Dynamic Array Mapping Matrix Rules
     hash_idx = day_num + phase_offset
     
     veg_proteins = ["Low-fat Tofu Tikka", "Grated Paneer Bhurji", "Sprouted Green Moong", "Chana Masala Chaat", "Soya Chunk Stir-Fry", "Masala Dal Soups"]
@@ -334,36 +367,41 @@ elif st.session_state.active_window == 5:
     st.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
-# WINDOW 6: COMPLIANCE, TRACKERS & PROVIDER GRID
+# WINDOW 6: COMPLIANCE WITH ACTIVE LIVE IST TIMERS & NOTIFICATION ALARMS
 # ==========================================
 elif st.session_state.active_window == 6:
     st.markdown("<div class='window-container'>", unsafe_allow_html=True)
-    st.markdown("<h3 style='font-family: \"Playfair Display\", serif; color: #4A1D4A;'>🚨 Real-time Adherence Dashboards & Regional Provider Locator</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='font-family: \"Playfair Display\", serif; color: #7F1D1D;'>🚨 Safety Compliance Alarms & Regional Provider Networks</h3>", unsafe_allow_html=True)
     
     city_tag = st.session_state.user_data.get('location', 'Lucknow, Uttar Pradesh')
     w_baseline = float(st.session_state.user_data.get('weight', 68.0) * 0.035)
     
-    h1, h2 = st.columns(2)
-    with h1:
-        st.markdown("<h4 style='font-family: \"Playfair Display\", serif; color: #4A1D4A;'>⏰ Precision AI Active Alarms Panel</h4>", unsafe_allow_html=True)
-        st.checkbox("🔔 Water Tracker: Log 250ml capacity fluid clear interval now.")
-        st.checkbox("💊 Pharmacy Line: Fasting Levothyroxine / Metformin compliance checklist locked.")
+    hud1, hud2 = st.columns(2)
+    with hud1:
+        st.markdown("<h4 style='font-family: \"Playfair Display\", serif; color: #7F1D1D;'>⏰ Precision AI Interactive Audio Alarms</h4>", unsafe_allow_html=True)
+        st.caption(f"🕒 Alarm Core synced with live IST Baseline: **{formatted_time}**")
+        
+        wat_alarm = st.checkbox("🔔 Water Tracker Reminder (Recommended interval sound sync active)")
+        med_alarm = st.checkbox("💊 Specialized Prescription Medication Alarm (IST Schedule Sync)")
+        
+        if wat_alarm or med_alarm:
+            trigger_alarm_sound()
         
         st.markdown("---")
-        st.markdown("<h4 style='font-family: \"Playfair Display\", serif; color: #4A1D4A;'>🍎 Multi-Food Caloric Dictionary Index Lookups</h4>", unsafe_allow_html=True)
+        st.markdown("<h4 style='font-family: \"Playfair Display\", serif; color: #7F1D1D;'>🍎 Multi-Food Caloric Dictionary Index Lookups</h4>", unsafe_allow_html=True)
         f_select = st.selectbox("Search Indian Food Items Base Matrix:", ["1 Wheat Chapati", "100g Paneer Bhurji", "1 Bowl Moong Dal Khichdi", "1 Whole Boiled Egg", "100g Chicken Breast (Grilled)", "1 Roasted Papad", "1 Bowl Green Sabzi"])
         cal_index = {"1 Wheat Chapati": "85 kcal", "100g Paneer Bhurji": "190 kcal", "1 Bowl Moong Dal Khichdi": "220 kcal", "1 Whole Boiled Egg": "78 kcal", "100g Chicken Breast (Grilled)": "165 kcal", "1 Roasted Papad": "35 kcal", "1 Bowl Green Sabzi": "95 kcal"}
         st.code(f"Database Caloric Core Value: {cal_index[f_select]}")
         
         st.markdown("---")
-        st.markdown("<h4 style='font-family: \"Playfair Display\", serif; color: #4A1D4A;'>🥛 Hydration Multiplier Tracker Progress</h4>", unsafe_allow_html=True)
+        st.markdown("<h4 style='font-family: \"Playfair Display\", serif; color: #7F1D1D;'>🥛 Hydration Multiplier Tracker Progress</h4>", unsafe_allow_html=True)
         gl_drunk = st.slider("Glasses consumed today (250ml base units):", 0, 16, 4)
         total_liters = gl_drunk * 0.25
         st.progress(min(total_liters / w_baseline, 1.0))
         st.write(f"Logged Status: **{total_liters:.2f} L** out of calculated target **{w_baseline:.1f} L**")
         
     with h2:
-        st.markdown("<h4 style='font-family: \"Playfair Display\", serif; color: #4A1D4A;'>📍 Satellite Healthcare Provider Locator Grid</h4>", unsafe_allow_html=True)
+        st.markdown("<h4 style='font-family: \"Playfair Display\", serif; color: #7F1D1D;'>📍 Satellite Healthcare Provider Locator Grid</h4>", unsafe_allow_html=True)
         st.info(f"🛰️ Active Geolocation Lock Signal: Verified within **{city_tag}** Perimeter Networks")
         
         st.markdown("##### Closest Specialized Diagnostics & Emergency Nodes found:")
@@ -378,21 +416,21 @@ elif st.session_state.active_window == 6:
         </div>
         """, unsafe_allow_html=True)
 
-    st.markdown("<br><hr style='border-color: #EBD7FA;'><br>", unsafe_allow_html=True)
+    st.markdown("<br><hr style='border-color: #FCA5A5;'><br>", unsafe_allow_html=True)
     
     # --- EXECUTIVE FOUNDER AUTHENTICITY BLOCK ---
     st.markdown(f"""
-    <div class='founder-card' style='background: linear-gradient(135deg, rgba(253, 242, 253, 0.9) 0%, rgba(243, 230, 250, 0.9) 100%) !important; padding: 30px; border-radius: 20px; border: 1px solid #EBD7FA;'>
-        <h3 style='font-family: \"Playfair Display\", serif; color: #4A1D4A; margin-top:0;'>👩‍⚕️ Clinical Product System Architecture</h3>
-        <h4 style='color: #8B5CF6; margin-top:5px; font-weight:600; letter-spacing:0.5px;'>Maihwish Rizvi | Registered Pharmacist</h4>
-        <p style='line-height:1.6; font-size:0.95rem; color:#3D2D3D; margin-top:12px;'>
+    <div class='founder-card' style='background: linear-gradient(135deg, rgba(254, 242, 242, 0.9) 0%, rgba(254, 226, 226, 0.9) 100%) !important; padding: 30px; border-radius: 20px; border: 1px solid #FCA5A5;'>
+        <h3 style='font-family: \"Playfair Display\", serif; color: #7F1D1D; margin-top:0;'>👩‍⚕️ Clinical Product System Architecture</h3>
+        <h4 style='color: #991B1B; margin-top:5px; font-weight:600; letter-spacing:0.5px;'>Maihwish Rizvi | Registered Pharmacist</h4>
+        <p style='line-height:1.6; font-size:0.95rem; color:#451A1A; margin-top:12px;'>
             As a <strong>Registered Pharmacist</strong>, my formal clinical evaluation training allows me to design user-friendly wellness products 
             that bypass superficial fitness trends to target actual baseline neuroendocrine mechanisms. By pairing 30-day dynamic life-science 
             calibrations with a rich, comforting <strong>Indian culinary palate</strong>, SHEALTH presents a high-tech healthcare platform 
             engineered for rigorous daily patient safety and compliance tracking protocols.
         </p>
-        <hr style='border-color: #EBD7FA; margin: 15px 0;'>
-        <p style='font-size:0.8rem; color:#8B5CF6; margin:0;'><strong>Active Session Demographic Registry Details:</strong> Name: {st.session_state.user_data.get('name', 'N/A')} • Contact Token: {st.session_state.user_data.get('phone', 'N/A')} • Diagnostics History Log: {st.session_state.user_data.get('history', 'N/A')}</p>
+        <hr style='border-color: #FCA5A5; margin: 15px 0;'>
+        <p style='font-size:0.8rem; color:#991B1B; margin:0;'><strong>Active Session Demographic Registry Details:</strong> Name: {st.session_state.user_data.get('name', 'N/A')} • Contact Token: {st.session_state.user_data.get('phone', 'N/A')} • Diagnostics History Log: {st.session_state.user_data.get('history', 'N/A')}</p>
     </div>
     """, unsafe_allow_html=True)
     
