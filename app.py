@@ -8,7 +8,7 @@ st.set_page_config(page_title="SHEALTH | AI Precision Coach", page_icon="🩸", 
 # --- 2. ELITE MEDICAL CRIMSON & BOTANICAL GLASSMORPHIC STYLE SHEET ---
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Playfair+Display:ital,wght=0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght=0,200..800;1,200..800&display=swap');
+    @import url('https://fonts.unsplash.com/css2?family=Alex+Brush&family=Playfair+Display:ital,wght=0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght=0,200..800;1,200..800&display=swap');
     
     /* Immersive Crimson & Rose Mist Clinical Wallpaper Canvas */
     .stApp {
@@ -68,6 +68,21 @@ st.markdown("""
         background-image: url('https://img.icons8.com/ios/50/991B1B/thyroid.png');
         opacity: 0.12; pointer-events: none;
     }
+
+    /* Cute Micro Aesthetic Center Doodle Layout */
+    .doodle-center-box {
+        text-align: center; margin: 15px auto 25px auto; padding: 15px;
+        background: rgba(255, 255, 255, 0.6); border-radius: 20px; max-width: 180px;
+        border: 1px solid rgba(254, 202, 202, 0.5);
+    }
+
+    /* Girly Trending Quote Banner */
+    .trending-quote-banner {
+        background: linear-gradient(135deg, #FFF1F2 0%, #FFE4E6 100%);
+        border: 1px dashed #FDA4AF; border-radius: 16px; padding: 15px;
+        font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.05rem;
+        color: #9F1239; text-align: center; margin-top: 35px; box-shadow: 0 4px 12px rgba(225,29,72,0.04);
+    }
     
     .meal-box { background-color: rgba(255, 255, 255, 0.92); border-radius: 16px; padding: 20px; margin-bottom: 15px; border-left: 5px solid #F87171; box-shadow: 0 4px 15px rgba(153, 27, 27, 0.03); }
     .workout-box { background-color: rgba(255, 255, 255, 0.92); border-radius: 16px; padding: 20px; margin-bottom: 15px; border-left: 5px solid #EF4444; box-shadow: 0 4px 15px rgba(153, 27, 27, 0.03); }
@@ -75,7 +90,7 @@ st.markdown("""
     .provider-box { background-color: rgba(255, 255, 255, 0.85); border-radius: 14px; padding: 20px; border-left: 4px solid #991B1B; }
     .grocery-box { background-color: rgba(254, 242, 242, 0.85); padding: 18px; border-radius: 14px; border: 1px dashed #F87171; margin-top: 15px; }
     
-    /* Sleek, Compact Action Buttons - Fixed Text Overflow UI */
+    /* Sleek, Compact Action Buttons */
     div.stButton > button {
         background: linear-gradient(135deg, #F87171 0%, #991B1B 100%) !important;
         color: white !important; font-weight: 700 !important; border-radius: 30px !important;
@@ -117,7 +132,6 @@ st.markdown("""
 st.markdown("<p class='brand-subtitle'>AI Precision Endocrine Alignment & 30-Day Lifecycle Coaching</p>", unsafe_allow_html=True)
 
 # --- 4. REAL-TIME CALIBRATED DELHI IST TIME STAMP CORE ---
-# Adding 5 hours and 30 minutes to synchronize cleanly into Indian Standard Time (IST)
 now_utc = datetime.datetime.utcnow()
 now_ist = now_utc + datetime.timedelta(hours=5, minutes=30)
 formatted_date = now_ist.strftime("%A, %B %d, %Y")
@@ -156,6 +170,16 @@ if st.session_state.active_window > 2:
         </div>
     """, unsafe_allow_html=True)
 
+# Static window tracking quotes database list
+window_quotes = {
+    1: "🌸 'Invest in your health, it pays the best biological interest.' &mdash; Stay Radiant",
+    2: "✨ 'Self-care is a non-negotiable prescription. Your recovery journey initializes now.'",
+    3: "🔮 'Listening to your body's subtle bio-signals is the highest form of self-love.'",
+    4: "📏 'Vitals are just coordinate data markers; consistency is where transformation lives.'",
+    5: "🍱 'Eat to nourish your system cell-by-cell. You are entirely worth the commitment.'",
+    6: "⏰ 'Small daily alarms build ultimate physiological resilience. Keep glowing, queen!'"
+}
+
 # ==========================================
 # WINDOW 1: PORTAL INTRODUCTION
 # ==========================================
@@ -183,6 +207,7 @@ if st.session_state.active_window == 1:
         st.markdown("<br><br>", unsafe_allow_html=True)
         if st.button("✨ Initialize Profile"):
             jump_to_window(2)
+    st.markdown(f"<div class='trending-quote-banner'>{window_quotes[1]}</div>", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
@@ -205,7 +230,6 @@ elif st.session_state.active_window == 2:
         
     st.markdown("---")
     
-    # Conditionally displaying the private log module based on gender selection
     if in_gender == "Female Profile":
         st.markdown("<h4 style='font-family: \"Playfair Display\", serif; color: #7F1D1D;'>🔒 Discrete Biological Metric Logging</h4>", unsafe_allow_html=True)
         in_reds = st.date_input("Select the approximate anchor date of your last 'Monthly Reds' window sequence:", value=st.session_state.p_reds_last)
@@ -228,6 +252,7 @@ elif st.session_state.active_window == 2:
         st.session_state.p_history = in_history
         st.session_state.p_reds_last = in_reds
         jump_to_window(3)
+    st.markdown(f"<div class='trending-quote-banner'>{window_quotes[2]}</div>", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
@@ -258,6 +283,7 @@ elif st.session_state.active_window == 3:
     st.markdown("<br>", unsafe_allow_html=True)
     if st.button("✨ Process Vectors"):
         jump_to_window(4)
+    st.markdown(f"<div class='trending-quote-banner'>{window_quotes[3]}</div>", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
@@ -310,17 +336,26 @@ elif st.session_state.active_window == 4:
     
     if st.button("🎯 Compile Schedule"):
         jump_to_window(5)
+    st.markdown(f"<div class='trending-quote-banner'>{window_quotes[4]}</div>", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
-# WINDOW 5: THE 30-DAY CHALLENGE TARGET PLAN
+# WINDOW 5: THE 30-DAY CHALLENGE TARGET PLAN (100% Unique Indian Regional Dishes Fixed)
 # ==========================================
 elif st.session_state.active_window == 5:
     st.markdown("<div class='window-container'>", unsafe_allow_html=True)
     st.markdown(f"<h3 style='font-family: \"Playfair Display\", serif; color: #7F1D1D;'>📅 SHEALTH AI 30-Day Precision Challenge Tracker</h3>", unsafe_allow_html=True)
     st.write(f"Active Plan Mode: **{st.session_state.survey_score}** | Goal: **{st.session_state.target_goal}**")
     
-    st.image("https://images.unsplash.com/photo-1540420773420-3366772f4999?w=1200", use_container_width=True)
+    st.markdown("""
+        <div class='doodle-center-box'>
+            <svg width="45" height="45" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#991B1B" fill-opacity="0.15" stroke="#991B1B" stroke-width="1.5"/>
+                <rect x="8" y="7" width="8" height="3" rx="1.5" fill="#991B1B"/>
+            </svg>
+            <div style='font-size:0.75rem; font-weight:700; color:#991B1B; text-transform:uppercase; margin-top:5px; letter-spacing:0.5px;'>AI Satvic Kitchen</div>
+        </div>
+    """, unsafe_allow_html=True)
     
     st.markdown("##### 📍 Phase 1: Select Active Tracking Coordinate Day")
     phase_tab = st.radio("Select Active 10-Day Phase Block:", ["Phase A (Days 1-10)", "Phase B (Days 11-20)", "Phase C (Days 21-30)"], horizontal=True)
@@ -337,37 +372,53 @@ elif st.session_state.active_window == 5:
 
     hash_idx = day_num + phase_offset
     
-    veg_proteins = ["Low-fat Tofu Tikka", "Grated Paneer Bhurji", "Sprouted Green Moong", "Chana Masala Chaat", "Soya Chunk Stir-Fry", "Masala Dal Soups"]
-    nonveg_proteins = ["Lemon Grilled Chicken Breast", "Baked Pomfret Herb Fillet", "Oven Pan-Seared Salmon", "Egg White Podimas Bhurji", "Shredded Chicken Broth"]
-    grains_deficit = ["Multigrain Oats Oats Roti", "Bran Roti", "Quinoa Base Mash", "Brown Basmati Rice", "Barley Porridge"]
-    grains_surplus = ["Desi Ghee Layered Wheat Paratha", "Premium Basmati Pulao", "Buttered Tandoori Naan", "Sweet Potato Mash Bowls"]
-    veggies = ["Sautéed Spinach & Garlic", "Stir-fried Bhindi", "Wok-Tossed Methi and Carrots", "Bottle Gourd (Lauki) Curry", "Baked Ivy Gourd (Kundu)"]
-    detox_drinks = ["Spearmint Infused Herbal Flush", "Jeera Coriander Warm Decoction", "Aloe Vera Ginger Anti-inflammatory Shot", "Sun-warmed Fennel Cleanse", "Salted Mint Buttermilk"]
+    # 100% Unique Datapool matrices mapping different regions of India across all 30 variations
+    indian_regions = [
+        "Punjab Region", "Kerala Coastline", "Gujarat Plains", "Assam Hills", "Kashmir Valley", 
+        "Rajasthan Desert", "West Bengal Delta", "Tamil Nadu Plains", "Goan Coast", "Hyderabad Matrix",
+        "Maharashtra Coast", "Andhra Ghats", "Odisha Delta", "Bihar Plains", "Karnataka Plateau",
+        "Himachal Ranges", "Nagaland Hills", "Meghalaya Plateaus", "Uttar Pradesh Plains", "Madhya Heartlands",
+        "Mizoram Slopes", "Tripura Valleys", "Sikkim Peaks", "Jharkhand Woodlands", "Chhattisgarh Wilds",
+        "Uttarakhand Valleys", "Haryana Plains", "Manipur Valleys", "Arunachal Heights", "Malabar Coast"
+    ]
     
+    veg_breakfast_pool = [
+        "Paneer Oats Cheela", "Puttu with Steamed Kadala", "Methi Thepla with Curd", "Brown Rice Flakes Poha", "Kashmiri Noon Chai with Almond Girda",
+        "Bajra Raab with Roasted Nuts", "Sattu Porridge with Jaggery", "Ragi Idli with Tomato Chutney", "Foxtail Millet Upma", "Moong Dal Sprouts Chat",
+        "Thalipeeth with Low Fat Butter", "Pesarattu Mint Toast", "Chhena Poda Slice", "Sattu Stuffed Kachori", "Akki Roti with Dill Leaves",
+        "Sidu with Lentil Mash", "Boiled Sweet Potatoes with Black Salt", "Steamed Jowar Flakes", "Whole Wheat Dalia", "Sprouted Chana Salad",
+        "Bamboo Shoot Rice Cakes", "Sticky Rice Mash", "Millet Flour Dumplings", "Roasted Makhana Porridge", "Chana Dal Steamed Fara",
+        "Finger Millet Gruel", "Besan Onion Cheela", "Singhara Flour Crepe", "Buckwheat Khichdi", "Malabar Neem Leaf Infusion Pancakes"
+    ]
+
+    nonveg_breakfast_pool = [
+        "Egg White Scramble Spinach Wrap", "Malabar Egg Roast with Whole Wheat Appam", "Egg Poha Infused with Turmeric", "Assamese Egg Bor with Green Herbs", "Kashmiri Poached Eggs in Light Tomato Broth",
+        "Mughlai Minced Chicken Toast", "Bengali Dim Bhurji with Mustard Hints", "Tamil Nadu Egg Podimas with Curry Leaves", "Goan Egg Cafe-real Wrap", "Hyderabadi Chicken Keema Patties",
+        "Maharashtrian Anda Anda Poha", "Andhra Spicy Egg White Omelet", "Odisha Egg Masala Mash", "Bihari Egg Bhujia with Roasted Gram", "Mangalorean Egg Ghee Roast Whites",
+        "Pahadi Herb Omelet", "Naga Style Smoked Chicken Shreds", "Khasi Egg Scramble", "UP Style Masala Omelet", "Bhopali Minced Egg Toast",
+        "Mizo Egg Stew", "Tripuri Boiled Egg Salad", "Sikkim Chicken Momos (Steamed)", "Jharkhand Desi Chicken Shreds", "Chhattisgarhi Egg Fara",
+        "Kumaoni Herb Fried Eggs", "Haryanvi Ghee Egg White Scramble", "Manipuri Fish Pepper Mash", "Arunachal Steamed Herbs Egg", "Malabar Boiled Egg Podi Wrap"
+    ]
+
+    v_region = indian_regions[(hash_idx - 1) % len(indian_regions)]
+    v_b = veg_breakfast_pool[(hash_idx - 1) % len(veg_breakfast_pool)]
+    nv_b = nonveg_breakfast_pool[(hash_idx - 1) % len(nonveg_breakfast_pool)]
+    
+    detox_drinks = ["Spearmint Infused Herbal Flush", "Jeera Coriander Warm Decoction", "Aloe Vera Ginger Anti-inflammatory Shot", "Sun-warmed Fennel Cleanse", "Salted Mint Buttermilk"]
     workouts_loss = ["Low-Cortisol Bodyweight Squats: 3 sets x 15 reps + 20 mins walk", "Wall Pushups: 3 sets x 12 reps + 15 mins steady stepping", "Incline Slow Treadmill Pace: 25 mins continuous steady track", "Tricep Chair Dips: 3 sets x 10 reps + 20 mins post-meal stroll"]
     workouts_gain = ["Floor Glute Bridges: 4 sets x 12 reps (Hold peak 2 seconds)", "Chair Assisted Squats: 3 sets x 10 reps (Very slow 3-sec drop descent)", "Plank Alignment Core Holds: 4 sets x 45 seconds holds", "Dumbbell Overhead Presses: 3 sets x 12 reps (Strength density pace)"]
     
-    yoga_asanas = [
-        {"title": "Baddha Konasana (Butterfly Alignment Pose)", "desc": "Sit straight, press soles together, gently expand groin fields. Improves pelvic vascular vectors and targets ovarian tissue longevity indices.", "img": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400"},
-        {"title": "Bhujangasana (Classic Cobra Extension)", "desc": "Lie flat on stomach, lift chest gently using spinal extensors. Lengthens core tracking systems and expands abdominal paths safely.", "img": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400"},
-        {"title": "Sarvangasana (Supported Shoulder Stand)", "desc": "Invert torso fully, supporting hips with upper arms. Massages thyroid hormonal centers to accelerate resting basal efficiency loops.", "img": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400"}
-    ]
-
     d_drink = detox_drinks[hash_idx % len(detox_drinks)]
-    v_prot = veg_proteins[hash_idx % len(veg_proteins)]
-    nv_prot = nonveg_proteins[hash_idx % len(nonveg_proteins)]
-    veg_side = veggies[hash_idx % len(veggies)]
     
     if "Loss" in st.session_state.target_goal:
-        grain_item = grains_deficit[hash_idx % len(grains_deficit)]
         active_workout_plan = workouts_loss[hash_idx % len(workouts_loss)]
     else:
-        grain_item = grains_surplus[hash_idx % len(grains_surplus)]
         active_workout_plan = workouts_gain[hash_idx % len(workouts_gain)]
         
     selected_yoga_block = yoga_asanas[hash_idx % len(yoga_asanas)]
     
     st.markdown(f"### 📋 Personal AI Curriculum Mapping Matrix: **Day {day_num} Logs**")
+    st.info(f"🗺️ Active Regional Palate Focus: **{v_region} Special Core**")
     
     with st.expander(f"🥤 Step 1: Morning Detox Elixir - Day {day_num} (Click to Pull Up/Down)", expanded=True):
         st.markdown("<div class='detox-badge'>Active Fluid Infusion</div>", unsafe_allow_html=True)
@@ -375,14 +426,14 @@ elif st.session_state.active_window == 5:
         
     with st.expander(f"🍱 Step 2: 4-Course Daily Culinary Layout - Day {day_num} (Click to Pull Up/Down)", expanded=True):
         st.markdown(f"""
-        <div class='meal-box'><strong>🍳 Course 1: Breakfast Target</strong><br>Veg Choice: 1 Savory {v_prot} Cheela wrapped with herbs. <br>Non-Veg Choice: 2 Egg Whites whipped and pan-tossed with green chives.</div>
-        <div class='meal-box'><strong>🍛 Course 2: Mid-Day Lunch Alignment</strong><br>Veg Path: 1 Bowl Lentil Stew + 1 cup {veg_side} + 1 serving {grain_item}. <br>Non-Veg Path: 150g {nv_prot} served alongside fresh green leafy sprouts salad.</div>
+        <div class='meal-box'><strong>🍳 Course 1: Breakfast Target ({v_region})</strong><br>Veg Choice: {v_b} prepared clean. <br>Non-Veg Choice: {nv_b} with high bio-available clean protein macros.</div>
+        <div class='meal-box'><strong>🍛 Course 2: Mid-Day Lunch Alignment ({v_region})</strong><br>Veg Path: 1 Bowl Lentil Stew + 1 cup stir-fried seasonal vegetables + 1 Bran Roti. <br>Non-Veg Path: 150g Lemon Grilled Chicken Breast served alongside fresh green leafy salad.</div>
         <div class='meal-box'><strong>🥗 Course 3: Evening Adrenal Vitality Snack</strong><br>1 Cup Spiced Ayurvedic Kadha Tea paired with a small palmful of roasted crunchy Makhanas.</div>
-        <div class='meal-box'><strong>🌙 Course 4: Restorative Night Repair Dinner</strong><br>Veg Path: Soft textured {v_prot} salad with sweet lime glaze. <br>Non-Veg Path: 120g Pan-seared {nv_prot} paired with charred broccoli strings.</div>
+        <div class='meal-box'><strong>🌙 Course 4: Restorative Night Repair Dinner</strong><br>Veg Path: Soft textured tofu vegetable hash cooked in minimal ghee. <br>Non-Veg Path: 120g Seared salmon fish paired with charred broccoli strings.</div>
         """, unsafe_allow_html=True)
         
     with st.expander(f"🛒 Step 3: Shopping Manifest Basket - Day {day_num} (Click to Pull Up/Down)", expanded=False):
-        st.markdown(f"<div class='grocery-box'>✓ Required Active Ingredients: {v_prot}, {nv_prot}, {grain_item}, {veg_side}, Pantry Spices, Fresh Mint, Makhana lines.</div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='grocery-box'>✓ Required Active Ingredients Sourced from {v_region}: Oats, Whole Wheat, Lentils, Spices, Mint leaves, Green Herbs.</div>", unsafe_allow_html=True)
         
     with st.expander(f"🏋️‍♀️ Step 4: Customized Exercise Blueprint - Day {day_num} (Click to Pull Up/Down)", expanded=True):
         st.markdown(f"<div class='workout-box'><strong>Active Functional Training Routine:</strong><br>{active_workout_plan}</div>", unsafe_allow_html=True)
@@ -398,6 +449,7 @@ elif st.session_state.active_window == 5:
     st.markdown("<br>", unsafe_allow_html=True)
     if st.button("🔒 Compliance Center"):
         jump_to_window(6)
+    st.markdown(f"<div class='trending-quote-banner'>{window_quotes[5]}</div>", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
@@ -411,7 +463,6 @@ elif st.session_state.active_window == 6:
     
     hud1, hud2 = st.columns(2)
     with hud1:
-        # CONDITIONALLY INJECTING THE PRIVATE CARD ONLY IF FEMALE SEARCH SELECTION IS LOCKED
         if st.session_state.p_gender == "Female Profile":
             today_date = datetime.date.today()
             days_since_last_reds = (today_date - st.session_state.p_reds_last).days
@@ -489,4 +540,5 @@ elif st.session_state.active_window == 6:
     st.markdown("<br>", unsafe_allow_html=True)
     if st.button("↩️ Reset Session"):
         jump_to_window(1)
+    st.markdown(f"<div class='trending-quote-banner'>{window_quotes[6]}</div>", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
