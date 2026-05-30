@@ -75,15 +75,16 @@ st.markdown("""
     .provider-box { background-color: rgba(255, 255, 255, 0.85); border-radius: 14px; padding: 20px; border-left: 4px solid #991B1B; }
     .grocery-box { background-color: rgba(254, 242, 242, 0.85); padding: 18px; border-radius: 14px; border: 1px dashed #F87171; margin-top: 15px; }
     
-    /* Sleek Deep Crimson Functional Action Buttons */
+    /* Sleek, Compact Action Buttons - Fixed Text Overflow UI */
     div.stButton > button {
         background: linear-gradient(135deg, #F87171 0%, #991B1B 100%) !important;
         color: white !important; font-weight: 700 !important; border-radius: 30px !important;
-        border: none !important; padding: 14px 40px !important; font-size: 1.05rem !important; letter-spacing: 0.5px;
-        box-shadow: 0 8px 25px rgba(153, 27, 27, 0.3) !important; transition: all 0.4s ease !important;
-        display: block; margin: 0 auto; width: 45%;
+        border: none !important; padding: 12px 30px !important; font-size: 0.95rem !important; letter-spacing: 0.5px;
+        box-shadow: 0 6px 20px rgba(153, 27, 27, 0.25) !important; transition: all 0.3s ease !important;
+        display: block; margin: 0 auto; width: auto; max-width: 280px; text-align: center;
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
-    div.stButton > button:hover { transform: translateY(-3px) scale(1.02) !important; box-shadow: 0 12px 30px rgba(153, 27, 27, 0.45) !important; }
+    div.stButton > button:hover { transform: translateY(-2px) scale(1.01) !important; box-shadow: 0 10px 25px rgba(153, 27, 27, 0.4) !important; }
     
     .stProgress > div > div > div > div { background-image: linear-gradient(to right, #F87171, #991B1B) !important; }
     div[data-testid="stMetricValue"] { font-size: 2.2rem; font-weight: 700; color: #7F1D1D; font-family: 'Playfair Display', serif; }
@@ -92,7 +93,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# --- 3. INLINE SVG LOGO EMBLEM DESIGN LAYER (CLINICAL BIO-SHIELD CORE) ---
+# --- 3. INLINE SVG LOGO EMBLEM DESIGN LAYER ---
 st.markdown("""
     <div class='logo-container'>
         <svg width="95" height="95" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0px 5px 12px rgba(153,27,27,0.3));">
@@ -115,11 +116,13 @@ st.markdown("""
 """, unsafe_allow_html=True)
 st.markdown("<p class='brand-subtitle'>AI Precision Endocrine Alignment & 30-Day Lifecycle Coaching</p>", unsafe_allow_html=True)
 
-# --- 4. REAL-TIME CURRENT TIME MATRIX ---
-now_ist = datetime.datetime.now()
+# --- 4. REAL-TIME CALIBRATED DELHI IST TIME STAMP CORE ---
+# Adding 5 hours and 30 minutes to synchronize cleanly into Indian Standard Time (IST)
+now_utc = datetime.datetime.utcnow()
+now_ist = now_utc + datetime.timedelta(hours=5, minutes=30)
 formatted_date = now_ist.strftime("%A, %B %d, %Y")
 formatted_time = now_ist.strftime("%I:%M %p")
-st.markdown(f"<div class='time-capsule'>⏱️ IST Track: {formatted_date} | {formatted_time}</div>", unsafe_allow_html=True)
+st.markdown(f"<div class='time-capsule'>⏱️ Delhi IST Track: {formatted_date} | {formatted_time}</div>", unsafe_allow_html=True)
 
 # --- 5. PLATFORM CORE ARCHITECTURE STATES ---
 if 'active_window' not in st.session_state: st.session_state.active_window = 1
@@ -133,6 +136,7 @@ if 'p_loc' not in st.session_state: st.session_state.p_loc = "Lucknow, Uttar Pra
 if 'p_age' not in st.session_state: st.session_state.p_age = 24
 if 'p_weight' not in st.session_state: st.session_state.p_weight = 68.0
 if 'p_height' not in st.session_state: st.session_state.p_height = 162.0
+if 'p_gender' not in st.session_state: st.session_state.p_gender = "Female Profile"
 if 'p_history' not in st.session_state: st.session_state.p_history = "None"
 if 'p_reds_last' not in st.session_state: st.session_state.p_reds_last = datetime.date.today() - datetime.timedelta(days=14)
 
@@ -148,7 +152,7 @@ def trigger_alarm_sound():
 if st.session_state.active_window > 2:
     st.markdown(f"""
         <div class='patient-vitals-badge'>
-            &nbsp;🩺 Active Profile: {st.session_state.p_name} ({st.session_state.p_age}F) | 📍 Region: {st.session_state.p_loc.split(',')[0]} | ⚖️ Vitals: {st.session_state.p_weight}kg / {st.session_state.p_height}cm
+            &nbsp;🩺 Profile Ledger: {st.session_state.p_name} | Axis: {st.session_state.p_gender} | Vitals: {st.session_state.p_weight}kg / {st.session_state.p_height}cm
         </div>
     """, unsafe_allow_html=True)
 
@@ -177,12 +181,12 @@ if st.session_state.active_window == 1:
         st.markdown("<h5 style='color: #7F1D1D; font-family: \"Playfair Display\", serif;'>Endocrine Pacing Models</h5>", unsafe_allow_html=True)
         st.write("Explore how steady adjustments in daily complex carbohydrate hierarchies stabilize internal metabolic curves. Learn to map low-impact skeletal movements to safely process high system loads without inducing central fatigue lines.")
         st.markdown("<br><br>", unsafe_allow_html=True)
-        if st.button("✨ Initialize SHEALTH AI Registration Profile"):
+        if st.button("✨ Initialize Profile"):
             jump_to_window(2)
     st.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
-# WINDOW 2: PATIENT REGISTRATION WITH PRIVATE LOG HOOKS
+# WINDOW 2: PATIENT REGISTRATION WITH FILTER LOCKS
 # ==========================================
 elif st.session_state.active_window == 2:
     st.markdown("<div class='window-container'>", unsafe_allow_html=True)
@@ -195,23 +199,30 @@ elif st.session_state.active_window == 2:
         in_loc = st.text_input("Geographic Coordinate Base (City/State):", value=st.session_state.p_loc)
     with r2:
         in_age = st.number_input("Biological Age Value:", min_value=12, max_value=85, value=st.session_state.p_age)
-        in_gender = st.radio("Dynamic Gender Profile Template:", ["Female Archetype Settings", "Male Archetype Settings"])
+        in_gender = st.radio("Dynamic Gender Profile Template:", ["Female Profile", "Male Profile"])
         in_weight = st.number_input("Core Mass Weight Field (kg):", min_value=30.0, max_value=190.0, value=st.session_state.p_weight)
         in_height = st.number_input("Core Axis Height Field (cm):", min_value=110.0, max_value=230.0, value=st.session_state.p_height)
         
     st.markdown("---")
-    st.markdown("<h4 style='font-family: \"Playfair Display\", serif; color: #7F1D1D;'>🔒 Discrete Biological Metric Logging</h4>", unsafe_allow_html=True)
-    in_reds = st.date_input("Select the approximate anchor date of your last 'Monthly Reds' window sequence:", value=st.session_state.p_reds_last)
+    
+    # Conditionally displaying the private log module based on gender selection
+    if in_gender == "Female Profile":
+        st.markdown("<h4 style='font-family: \"Playfair Display\", serif; color: #7F1D1D;'>🔒 Discrete Biological Metric Logging</h4>", unsafe_allow_html=True)
+        in_reds = st.date_input("Select the approximate anchor date of your last 'Monthly Reds' window sequence:", value=st.session_state.p_reds_last)
+    else:
+        in_reds = st.session_state.p_reds_last
+        st.info("System Notification: Adaptive hormone tracking is currently configured to neutral baseline profiles.")
     
     st.markdown("---")
     st.markdown("<h4 style='font-family: \"Playfair Display\", serif; color: #7F1D1D;'>📋 Prior Diagnoses & Medication Overlays</h4>", unsafe_allow_html=True)
     in_history = st.text_area("Log active clinical prescriptions or metabolic history markers:", value=st.session_state.p_history)
     
-    if st.button("🚀 Lock Biometrics & Continue"):
+    if st.button("🚀 Lock Profile"):
         st.session_state.p_name = in_name
         st.session_state.p_phone = in_phone
         st.session_state.p_loc = in_loc
         st.session_state.p_age = in_age
+        st.session_state.p_gender = in_gender
         st.session_state.p_weight = in_weight
         st.session_state.p_height = in_height
         st.session_state.p_history = in_history
@@ -245,7 +256,7 @@ elif st.session_state.active_window == 3:
     else: st.session_state.survey_score = "Hypothyroidism Protocol Hub"
         
     st.markdown("<br>", unsafe_allow_html=True)
-    if st.button("✨ Lock Endocrine Vectors & Advance"):
+    if st.button("✨ Process Vectors"):
         jump_to_window(4)
     st.markdown("</div>", unsafe_allow_html=True)
 
@@ -256,7 +267,7 @@ elif st.session_state.active_window == 4:
     st.markdown("<div class='window-container'>", unsafe_allow_html=True)
     st.markdown("<h3 style='font-family: \"Playfair Display\", serif; color: #7F1D1D;'>📐 Physical Biometrics Converter & AI Diagnostic Engine</h3>", unsafe_allow_html=True)
     
-    with st.expander("🔄 Open Metric Converter Tool (Push Up/Down for Conversion Matrices)", expanded=False):
+    with st.expander("🔄 Unit Converter Lab (Push Up/Down for Conversion Matrices)", expanded=False):
         uc1, uc2 = st.columns(2)
         with uc1:
             lbs_in = st.number_input("Weight Input scale from Pounds (lbs):", value=float(st.session_state.p_weight * 2.20462))
@@ -297,7 +308,7 @@ elif st.session_state.active_window == 4:
     st.markdown("<br><hr style='border-color: #FCA5A5;'><br>", unsafe_allow_html=True)
     st.session_state.target_goal = st.selectbox("Configure Targeted 30-Day Target Pathway Matrix:", ["Weight Loss Deficit Track", "Weight Gain Surplus Track"])
     
-    if st.button("🎯 Compile My Dynamic 30-Day Adherence Schedule"):
+    if st.button("🎯 Compile Schedule"):
         jump_to_window(5)
     st.markdown("</div>", unsafe_allow_html=True)
 
@@ -385,12 +396,12 @@ elif st.session_state.active_window == 5:
             st.write(selected_yoga_block["desc"])
             
     st.markdown("<br>", unsafe_allow_html=True)
-    if st.button("🔒 Enter Live Verification Surveillance Hub"):
+    if st.button("🔒 Compliance Center"):
         jump_to_window(6)
     st.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
-# WINDOW 6: COMPLIANCE & PRIVATE MONTHLY REDS TRACKER
+# WINDOW 6: COMPLIANCE CORE & GENDER FILTERED TRACKER
 # ==========================================
 elif st.session_state.active_window == 6:
     st.markdown("<div class='window-container'>", unsafe_allow_html=True)
@@ -398,30 +409,32 @@ elif st.session_state.active_window == 6:
     
     w_baseline = float(st.session_state.p_weight * 0.035)
     
-    # PRIVATE CLINICAL SURVEY CONTEXT MATHEMATICAL ENGINE
-    today_date = datetime.date.today()
-    days_since_last_reds = (today_date - st.session_state.p_reds_last).days
-    days_until_next_reds = (28 - (days_since_last_reds % 28)) % 28
-    
     hud1, hud2 = st.columns(2)
     with hud1:
-        st.markdown("<h4 style='font-family: \"Playfair Display\", serif; color: #7F1D1D;'>🔒 Private Dynamic 'Monthly Reds' Forecast</h4>", unsafe_allow_html=True)
-        
-        st.markdown(f"""
-        <div style='background-color:#FFF5F5; padding:20px; border-radius:15px; border-left:5px solid #DC2626; margin-bottom:20px;'>
-            <p style='margin:0; font-weight:700; color:#991B1B; font-size:1.1rem;'>🗓️ Estimated Next Secure Window Arrival</p>
-            <p style='font-size:2rem; font-weight:800; color:#7F1D1D; margin:10px 0;'>{days_until_next_reds} Days Remaining</p>
-            <p style='font-size:0.9rem; color:#451A1A; margin:0;'>
-                <strong>AI Lifestyle Advice:</strong> 
-                {"Prioritize hydration and include roasted Makhana to balance micro-cravings as your system transitions." if days_until_next_reds <= 7 else "Energy and strength baselines are high. Great phase to push alternate squat progressions."}
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown("---")
+        # CONDITIONALLY INJECTING THE PRIVATE CARD ONLY IF FEMALE SEARCH SELECTION IS LOCKED
+        if st.session_state.p_gender == "Female Profile":
+            today_date = datetime.date.today()
+            days_since_last_reds = (today_date - st.session_state.p_reds_last).days
+            days_until_next_reds = (28 - (days_since_last_reds % 28)) % 28
+            
+            st.markdown("<h4 style='font-family: \"Playfair Display\", serif; color: #7F1D1D;'>🔒 Private Dynamic 'Monthly Reds' Forecast</h4>", unsafe_allow_html=True)
+            st.markdown(f"""
+            <div style='background-color:#FFF5F5; padding:20px; border-radius:15px; border-left:5px solid #DC2626; margin-bottom:20px;'>
+                <p style='margin:0; font-weight:700; color:#991B1B; font-size:1.1rem;'>🗓️ Estimated Next Secure Window Arrival</p>
+                <p style='font-size:2rem; font-weight:800; color:#7F1D1D; margin:10px 0;'>{days_until_next_reds} Days Remaining</p>
+                <p style='font-size:0.9rem; color:#451A1A; margin:0;'>
+                    <strong>AI Tracker Advice:</strong> 
+                    {"Prioritize cellular recovery and include roasted Makhana to balance micro-cravings safely as vectors shift." if days_until_next_reds <= 7 else "Energy parameters are stable. Optimal window to execute Alternate Squat progressions."}
+                </p>
+            </div>
+            """, unsafe_allow_html=True)
+            st.markdown("---")
+            
         st.markdown("<h4 style='font-family: \"Playfair Display\", serif; color: #7F1D1D;'>⏰ Precision AI Interactive Audio Alarms</h4>", unsafe_allow_html=True)
-        wat_alarm = st.checkbox("¼ Water Tracker Reminder (Recommended interval sound sync active)")
-        med_alarm = st.checkbox("¼ Specialized Prescription Medication Alarm (IST Schedule Sync)")
+        st.caption(f"🕒 Alarm Core synced with Delhi IST: **{formatted_time}**")
+        
+        wat_alarm = st.checkbox("🔔 Water Tracker Notification (Recommended short bell sync)")
+        med_alarm = st.checkbox("💊 Active Hormone Prescription Alarm (Fasting Schedule Sync)")
         
         if wat_alarm or med_alarm:
             trigger_alarm_sound()
@@ -434,12 +447,12 @@ elif st.session_state.active_window == 6:
         
         st.markdown("---")
         st.markdown("<h4 style='font-family: \"Playfair Display\", serif; color: #7F1D1D;'>🥛 Hydration Multiplier Tracker Progress</h4>", unsafe_allow_html=True)
-        gl_drunk = st.slider("Glasses consumed today (250ml base units):", 0, 16, 4)
+        gl_drunk = st.slider("Glasses consumed today (250ml units):", 0, 16, 4)
         total_liters = gl_drunk * 0.25
         st.progress(min(total_liters / w_baseline, 1.0))
         st.write(f"Logged Status: **{total_liters:.2f} L** out of calculated target **{w_baseline:.1f} L**")
         
-    with hud2:
+    with h2:
         st.markdown("<h4 style='font-family: \"Playfair Display\", serif; color: #7F1D1D;'>📍 Satellite Healthcare Provider Locator Grid</h4>", unsafe_allow_html=True)
         st.info(f"🛰️ Active Geolocation Lock Signal: Verified within **{st.session_state.p_loc}** Perimeter Networks")
         
@@ -474,6 +487,6 @@ elif st.session_state.active_window == 6:
     """, unsafe_allow_html=True)
     
     st.markdown("<br>", unsafe_allow_html=True)
-    if st.button("↩️ Reset Platform Surveillance Session"):
+    if st.button("↩️ Reset Session"):
         jump_to_window(1)
     st.markdown("</div>", unsafe_allow_html=True)
