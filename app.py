@@ -211,4 +211,8 @@ with tab_founder:
         <span style='background-color:#FCE7F3; color:#9D174D; padding:4px 12px; border-radius:15px; font-size:0.8rem; font-weight:700; margin-right:8px;'>Indian Clinical Nutrition</span>
         <span style='background-color:#F3E8FF; color:#6B21A8; padding:4px 12px; border-radius:15px; font-size:0.8rem; font-weight:700;'>Pharmacological Logic</span>
     </div>
+<<<<<<< HEAD
     """, unsafe_allow_html=True)
+=======
+    """, unsafe_allow_html=True)
+>>>>>>> c704ac3273880372bfa628e9c95d659c5176ed86
