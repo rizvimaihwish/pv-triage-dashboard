@@ -426,37 +426,41 @@ elif st.session_state.active_window == 5:
     v_b = veg_breakfast_pool[(hash_idx - 1) % len(veg_breakfast_pool)]
     nv_b = nonveg_breakfast_pool[(hash_idx - 1) % len(nonveg_breakfast_pool)]
     
-    detox_drinks = ["Spearmint Infused Herbal Flush", "Jeera Coriander Warm Decoction", "Aloe Vera Ginger Anti-inflammatory Shot", "Sun-warmed Fennel Cleanse", "Salted Mint Buttermilk"]
-    workouts_loss = ["Low-Cortisol Bodyweight Squats: 3 sets x 15 reps + 20 mins walk", "Wall Pushups: 3 sets x 12 reps + 15 mins steady stepping", "Incline Slow Treadmill Pace: 25 mins continuous steady track", "Tricep Chair Dips: 3 sets x 10 reps + 20 mins post-meal stroll"]
-    workouts_gain = ["Floor Glute Bridges: 4 sets x 12 reps (Hold peak 2 seconds)", "Chair Assisted Squats: 3 sets x 10 reps (Very slow 3-sec drop descent)", "Plank Alignment Core Holds: 4 sets x 45 seconds holds", "Dumbbell Overhead Presses: 3 sets x 12 reps (Strength density pace)"]
+    detox_drinks = ["Spearmint Herbal Flush", "Jeera Coriander Decoction", "Aloe Vera Ginger Shot", "Fennel Cleanse", "Mint Buttermilk"]
+    snacks_pool = ["Ayurvedic Kadha + Roasted Makhanas", "Warm Turmeric Milk + 4 Almonds", "Green Tea + Roasted Chana", "Mint Buttermilk + Flax Seeds", "Coconut Water + Chia Seeds"]
+    dinner_veg = ["Soft Tofu Hash in minimal ghee", "Bottle Gourd (Lauki) Soup + 1 Bran Roti", "Moong Dal Khichdi with cow ghee", "Steamed Broccoli + Paneer Cubes", "Besan Cheela with Mint Chutney"]
+    dinner_nveg = ["120g Seared Salmon + Broccoli", "Grilled Chicken Salad + Olive Oil", "Egg White Stew + Beans", "Chicken Clear Soup + Sautéed Veggies", "Baked Fish + Sweet Potato Mash"]
+    
+    workouts_loss = ["Low-Cortisol Bodyweight Squats: 3x15 reps + 20 min walk", "Wall Pushups: 3x12 reps + 15 min stepping", "Incline Slow Treadmill: 25 mins", "Tricep Chair Dips: 3x10 reps + 20 min stroll"]
+    workouts_gain = ["Floor Glute Bridges: 4x12 reps", "Chair Assisted Squats: 3x10 reps", "Plank Alignment Core: 4x45s holds", "Dumbbell Overhead Presses: 3x12 reps"]
     
     d_drink = detox_drinks[hash_idx % len(detox_drinks)]
+    d_snack = snacks_pool[hash_idx % len(snacks_pool)]
+    d_din_v = dinner_veg[hash_idx % len(dinner_veg)]
+    d_din_nv = dinner_nveg[hash_idx % len(dinner_nveg)]
     
-    if "Loss" in st.session_state.target_goal:
-        active_workout_plan = workouts_loss[hash_idx % len(workouts_loss)]
-    else:
-        active_workout_plan = workouts_gain[hash_idx % len(workouts_gain)]
+    if "Loss" in st.session_state.target_goal: active_workout_plan = workouts_loss[hash_idx % len(workouts_loss)]
+    else: active_workout_plan = workouts_gain[hash_idx % len(workouts_gain)]
         
     yoga_asanas = [
-        {"title": "Baddha Konasana (Butterfly Alignment Pose)", "desc": "Sit straight, press soles together, gently expand groin fields. Improves pelvic vascular vectors and reproductive indices.", "img": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400"},
-        {"title": "Bhujangasana (Classic Cobra Extension)", "desc": "Lie flat on stomach, lift chest gently using spinal extensors. Lengthens core tracking systems and expands abdominal paths safely.", "img": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400"},
-        {"title": "Sarvangasana (Supported Shoulder Stand)", "desc": "Invert torso fully, supporting hips with upper arms. Massages thyroid hormonal centers to accelerate resting basal efficiency loops.", "img": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400"}
+        {"title": "Baddha Konasana", "desc": "Improves pelvic vascular vectors.", "img": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400"},
+        {"title": "Bhujangasana", "desc": "Lengthens core tracking systems.", "img": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400"}
     ]
     selected_yoga_block = yoga_asanas[hash_idx % len(yoga_asanas)]
     
     st.markdown(f"### 📋 Personal AI Curriculum Mapping Matrix: **Day {day_num} Logs**")
     st.info(f"🗺️ Active Regional Palate Focus: **{v_region} Special Core**")
     
-    with st.expander(f"🥤 Step 1: Morning Detox Elixir - Day {day_num} (Click to Pull Up/Down)", expanded=True):
+    with st.expander(f"🥤 Step 1: Morning Detox Elixir - Day {day_num}", expanded=True):
         st.markdown("<div class='detox-badge'>Active Fluid Infusion</div>", unsafe_allow_html=True)
-        st.write(f"**Therapeutic Protocol:** Warmed {d_drink} administered empty-stomach to settle cellular targets.")
+        st.write(f"**Protocol:** Warmed {d_drink} administered empty-stomach.")
         
-    with st.expander(f"🍱 Step 2: 4-Course Daily Culinary Layout - Day {day_num} (Click to Pull Up/Down)", expanded=True):
+    with st.expander(f"🍱 Step 2: 4-Course Daily Culinary Layout - Day {day_num}", expanded=True):
         st.markdown(f"""
-        <div class='meal-box'><strong>🍳 Course 1: Breakfast Target ({v_region})</strong><br>Veg Choice: {v_b} prepared clean. <br>Non-Veg Choice: {nv_b} with high bio-available clean protein macros.</div>
-        <div class='meal-box'><strong>🍛 Course 2: Mid-Day Lunch Alignment ({v_region})</strong><br>Veg Path: 1 Bowl Lentil Stew + 1 cup stir-fried seasonal vegetables + 1 Bran Roti. <br>Non-Veg Path: 150g {nv_b} served alongside fresh green leafy salad.</div>
-        <div class='meal-box'><strong>🥗 Course 3: Evening Adrenal Vitality Snack</strong><br>1 Cup Spiced Ayurvedic Kadha Tea paired with a small palmful of roasted crunchy Makhanas.</div>
-        <div class='meal-box'><strong>🌙 Course 4: Restorative Night Repair Dinner</strong><br>Veg Path: Soft textured tofu vegetable hash cooked in minimal ghee. <br>Non-Veg Path: 120g Seared salmon fish paired with charred broccoli strings.</div>
+        <div class='meal-box'><strong>🍳 Course 1: Breakfast Target ({v_region})</strong><br>Veg: {v_b} <br>Non-Veg: {nv_b}</div>
+        <div class='meal-box'><strong>🍛 Course 2: Mid-Day Lunch Alignment ({v_region})</strong><br>Veg: Lentil Stew + Seasonal Veg + Roti <br>Non-Veg: 150g {nv_b} + Green Salad</div>
+        <div class='meal-box'><strong>🥗 Course 3: Evening Adrenal Vitality Snack</strong><br>{d_snack}</div>
+        <div class='meal-box'><strong>🌙 Course 4: Restorative Night Repair Dinner</strong><br>Veg: {d_din_v} <br>Non-Veg: {d_din_nv}</div>
         """, unsafe_allow_html=True)
         
     with st.expander(f"🛒 Step 3: Shopping Manifest Basket - Day {day_num} (Click to Pull Up/Down)", expanded=False):
@@ -493,8 +497,15 @@ elif st.session_state.active_window == 6:
     hud1, hud2 = st.columns(2)
     with hud1:
         if st.session_state.p_gender == "Female Profile":
-            days_since_last_reds = (now_ist.date() - st.session_state.p_reds_last).days
-            days_until_next_reds = (28 - (days_since_last_reds % 28)) % 28
+            today_date = datetime.date.today()
+            days_diff = (today_date - st.session_state.p_reds_last).days
+            
+            # Smart estimation logic (handles future dates and exact dates safely)
+            if days_diff < 0:
+                days_until_next_reds = abs(days_diff) % 28
+            else:
+                days_until_next_reds = (28 - (days_diff % 28))
+                if days_until_next_reds == 28: days_until_next_reds = 0
             
             st.markdown("<h4 style='font-family: \"Playfair Display\", serif; color: #7F1D1D;'>🔒 Private Dynamic 'Monthly Reds' Forecast</h4>", unsafe_allow_html=True)
             st.markdown(f"""
