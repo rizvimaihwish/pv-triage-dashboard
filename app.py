@@ -1,257 +1,318 @@
 import streamlit as st
-from datetime import datetime, timedelta
+import streamlit.components.v1 as components
 
-# --- 1. CONFIGURATION & CSS ---
-st.set_page_config(page_title="SHEALTH+ | Glass & Aesthetic Precision", page_icon="🎀", layout="wide")
+# 1. Setup Streamlit Page (Wide mode to fit the design)
+st.set_page_config(page_title="SHEALTH+ | Aesthetic Clinical Precision", layout="wide", initial_sidebar_state="collapsed")
 
+# 2. Hide Streamlit's default ugly margins and headers
 st.markdown("""
     <style>
-    /* Wavy Pastel Background */
-    .stApp {
-        background: linear-gradient(-45deg, #FFD1DC, #E9D5FF, #FFDAB9, #FBCFE8);
-        background-size: 400% 400%;
-        animation: gradientBG 15s ease infinite;
-    }
-    @keyframes gradientBG {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-    
-    /* Typography & Metallic Colors */
-    h1, h2, h3, h4, p, span, label {
-        color: #B83280 !important;
-        font-family: 'Plus Jakarta Sans', sans-serif !important;
-    }
-    
-    /* Glassmorphism Presentation Boxes */
-    .glass-box {
-        background: rgba(255, 255, 255, 0.45);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.7);
-        border-radius: 25px;
-        padding: 25px;
-        box-shadow: 0 8px 32px 0 rgba(184, 50, 128, 0.15);
-        margin-bottom: 20px;
-    }
-    
-    /* Disclaimers */
-    .disclaimer {
-        background: rgba(255,240,245,0.7); 
-        border: 1px dashed #F472B6; 
-        padding: 15px; 
-        border-radius: 20px; 
-        font-size: 0.85rem; 
-        color: #9D174D !important; 
-        text-align: center; 
-        margin-top: 30px; 
-        font-weight: bold;
-    }
-    
-    /* Buttons */
-    div.stButton > button {
-        background: linear-gradient(145deg, #F472B6, #B83280) !important;
-        color: white !important;
-        font-weight: 800 !important;
-        border-radius: 40px !important;
-        border: none !important;
-        padding: 10px 30px !important;
-        box-shadow: 0 10px 25px rgba(184, 50, 128, 0.4) !important;
-        text-transform: uppercase;
-    }
+        .block-container { padding: 0rem !important; max-width: 100% !important; }
+        header { display: none !important; }
+        footer { display: none !important; }
     </style>
 """, unsafe_allow_html=True)
 
-# --- 2. STATE MANAGEMENT ---
-if 'window' not in st.session_state: st.session_state.window = 1
-if 'p_name' not in st.session_state: st.session_state.p_name = ""
-if 'p_gender' not in st.session_state: st.session_state.p_gender = "Female"
-if 'p_weight' not in st.session_state: st.session_state.p_weight = 65.0
-if 'p_height' not in st.session_state: st.session_state.p_height = 160.0
-if 'p_region' not in st.session_state: st.session_state.p_region = "North India"
-if 'p_pref' not in st.session_state: st.session_state.p_pref = "Both (Veg & Non-Veg)"
-if 'p_target' not in st.session_state: st.session_state.p_target = "Weight Loss (PCOS/Thyroid Safe)"
-if 'lmp' not in st.session_state: st.session_state.lmp = datetime.today().date() - timedelta(days=14)
-if 'cycle_len' not in st.session_state: st.session_state.cycle_len = 28
-if 'meds' not in st.session_state: st.session_state.meds = ""
-if 'day' not in st.session_state: st.session_state.day = 1
-
-def set_window(w):
-    st.session_state.window = w
-
-def get_disclaimer():
-    return "<div class='disclaimer'>⚠️ Health Disclaimer: SHEALTH+ provides AI-assisted wellness data and is not a replacement for professional medical advisors or physicians.</div>"
-
-# Main Title Overlay
-st.markdown("<h1 style='text-align: center; font-family: \"Alex Brush\", cursive; font-size: 5rem; color: #B83280;'>Shealth+</h1>", unsafe_allow_html=True)
-
-# --- WINDOW 1: INTRO & FAQS ---
-if st.session_state.window == 1:
-    st.markdown("<div class='glass-box'><h3 style='text-align:center;'>Endocrine Aesthetics & Clinical Nutrition</h3><p style='text-align:center;'>Welcome to the hyper-personalized, clinical-grade nutrition architecture. We merge advanced pharmacological tracking with intuitive, beautiful daily rituals to prevent disease and optimize your vitality.</p></div>", unsafe_allow_html=True)
-    
-    col1, col2 = st.columns(2)
-    with col1:
-        st.image("https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600", use_container_width=True)
-        st.markdown("<div style='background:#000; height: 180px; border-radius: 25px; display:flex; align-items:center; justify-content:center; color:white; margin-top:10px;'>[ AI 30-Sec Coach Video ]</div>", unsafe_allow_html=True)
-    with col2:
-        st.markdown("<div class='glass-box'><h4>Nutritious Clinical FAQs</h4>", unsafe_allow_html=True)
-        with st.expander("What is Endocrine Pacing?"): st.write("Balancing complex carbs throughout the day to prevent insulin spikes, highly effective for PCOS and Diabetes.")
-        with st.expander("Why Regional Palates?"): st.write("Your gut microbiome digests local, culturally familiar spices and grains much more efficiently than alien diets.")
-        with st.expander("How does the AI adapt?"): st.write("It checks pharmacological interactions, alters meals based on BMI, and tracks daily hydration/mood goals.")
-        with st.expander("Monthly Reds Sync?"): st.write("The AI alters exercise and modifies micronutrients based on the cycle phase.")
-        st.markdown("</div>", unsafe_allow_html=True)
-    
-    st.button("Begin Clinical Intake", on_click=set_window, args=(2,))
-    st.markdown(get_disclaimer(), unsafe_allow_html=True)
-
-# --- WINDOW 2: PATIENT REGISTRATION ---
-elif st.session_state.window == 2:
-    st.markdown("<div class='glass-box'><h3>Patient Registration Portal</h3></div>", unsafe_allow_html=True)
-    
-    c1, c2 = st.columns(2)
-    with c1:
-        st.session_state.p_name = st.text_input("Full Name:", value=st.session_state.p_name)
-        st.text_input("Email ID:")
-        st.text_input("Contact Number:")
-        st.number_input("Age:", min_value=10, max_value=100, value=25)
-    with c2:
-        st.session_state.p_gender = st.selectbox("Biological Gender:", ["Female", "Male", "Other"], index=["Female", "Male", "Other"].index(st.session_state.p_gender))
-        st.session_state.p_region = st.selectbox("State / Region:", ["North India", "South India", "East India", "West India"])
-        st.session_state.p_pref = st.selectbox("Dietary Preference:", ["Both (Veg & Non-Veg)", "Pure Vegetarian", "Non-Vegetarian Focus"])
-        st.session_state.p_target = st.selectbox("Health Target:", ["Weight Loss (PCOS/Thyroid Safe)", "Weight Gain / Muscle Synthesis", "Diabetic / Hypertension Control"])
+# 3. Embed our ultra-aesthetic Glassmorphism HTML code
+html_code = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHEALTH+ | Aesthetic Clinical Precision</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-pink: #F472B6;
+            --deep-magenta: #B83280;
+            --pastel-purple: #E9D5FF;
+            --text-dark: #4A154B;
+            --glass-bg: rgba(255, 255, 255, 0.35);
+            --glass-border: rgba(255, 255, 255, 0.6);
+            --glass-shadow: 0 15px 35px 0 rgba(184, 50, 128, 0.2);
+            --input-glass: rgba(255, 255, 255, 0.5);
+        }
         
-    st.button("Lock Profile & Proceed", on_click=set_window, args=(3,))
-    st.markdown(get_disclaimer(), unsafe_allow_html=True)
+        body, html {
+            margin: 0; padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif !important;
+            color: var(--text-dark) !important;
+            min-height: 100vh;
+            background-color: #fce4ec;
+            background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            overflow-x: hidden;
+        }
 
-# --- WINDOW 3: BIOMETRICS & SYMPTOMS ---
-elif st.session_state.window == 3:
-    st.markdown("<div class='glass-box'><h3>Biometrics & Pharmacological Matrix</h3></div>", unsafe_allow_html=True)
-    
-    c1, c2 = st.columns(2)
-    with c1: st.session_state.p_weight = st.number_input("Weight (kg):", value=st.session_state.p_weight)
-    with c2: st.session_state.p_height = st.number_input("Height (cm):", value=st.session_state.p_height)
-    
-    hm = st.session_state.p_height / 100
-    bmi = st.session_state.p_weight / (hm * hm) if hm > 0 else 0
-    status = "Underweight" if bmi < 18.5 else "Optimal Health" if bmi <= 24.9 else "Overweight Matrix" if bmi <= 29.9 else "Clinical Obesity Protocol"
-    
-    st.markdown(f"<div class='glass-box' style='text-align:center;'><strong>AI Calculated BMI: <span style='font-size:2rem;'>{bmi:.1f}</span></strong><p>{status}</p></div>", unsafe_allow_html=True)
-    
-    st.session_state.meds = st.text_area("List prior or current medications for interaction checks:")
-    
-    st.markdown("<div class='glass-box'><h4>Symptom Stratification</h4>", unsafe_allow_html=True)
-    st.checkbox("High resistance to metabolic calorie deficits?")
-    st.checkbox("Deep muscular exhaustion or systemic fatigue?")
-    st.checkbox("Facial flareups or active hair volume reductions?")
-    st.markdown("</div>", unsafe_allow_html=True)
-    
-    st.button("Generate Master Plan", on_click=set_window, args=(4,))
-    st.markdown(get_disclaimer(), unsafe_allow_html=True)
+        .animated-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(45deg, rgba(244,114,182,0.1), rgba(233,213,255,0.1), rgba(255,218,185,0.1));
+            background-size: 300% 300%;
+            animation: pulseBg 12s ease infinite;
+            pointer-events: none; z-index: -1;
+        }
+        @keyframes pulseBg { 0% {background-position: 0% 50%;} 50% {background-position: 100% 50%;} 100% {background-position: 0% 50%;} }
 
-# --- WINDOW 4: 30-DAY DIET & YOGA PLAN ---
-elif st.session_state.window == 4:
-    st.markdown("<div class='glass-box'><h3>30-Day Precision Tracking</h3></div>", unsafe_allow_html=True)
-    
-    st.session_state.day = st.slider("Slide Active Day (1-30):", 1, 30, st.session_state.day)
-    day = st.session_state.day
-    
-    # 60 Item Diet Logic
-    region = st.session_state.p_region
-    pref = st.session_state.p_pref
-    
-    detox = ["Warm Lemon Honey Water", "Jeera Coriander Decoction", "Apple Cider Vinegar Shot", "Fennel Seed Infusion", "Mint Aloe Vera Flush", "Cinnamon Brew"]
-    bf_n_veg = ["Paneer Oats Cheela", "Kashmiri Noon Chai with Almond Girda", "Sattu Porridge with Jaggery", "Sattu Stuffed Kachori", "Sidu with Lentil Mash", "Whole Wheat Dalia", "Chana Dal Steamed Fara", "Besan Onion Cheela", "Singhara Flour Crepe"]
-    bf_n_nv = ["Egg White Scramble Spinach Wrap", "Kashmiri Poached Eggs in Tomato Broth", "Mughlai Minced Chicken Toast", "Pahadi Herb Baked Omelet", "UP Style Masala Omelet Platter", "Kumaoni Herb Fried Eggs", "Haryanvi Ghee Egg Scramble"]
-    
-    # Fallback assignment logic for regional arrays in Python
-    active_veg = bf_n_veg # Defaulting for simplicity in snippet, logic applies fully
-    active_nv = bf_n_nv
-    
-    bfast = active_veg[day % len(active_veg)] if "Veg" in pref and "Non" not in pref else active_nv[day % len(active_nv)] if "Non" in pref else (active_veg[day % len(active_veg)] if day % 2 == 0 else active_nv[day % len(active_nv)])
-    
-    lunch = ["Quinoa Buddha Bowl with Regional Greens", "Lentil Stew with Brown Rice", "Grilled Lean Protein with Asparagus", "Millet Khichdi with Ghee", "Zucchini Noodles with Tofu/Chicken"]
-    snack = ["Roasted Makhanas + Green Tea", "Handful of Almonds + Coconut Water", "Hummus with Carrot Sticks", "Chia Seed Pudding", "Dark Chocolate (70%+) + Herbal Tea"]
-    dinner = ["Light Clear Soup + Steamed Veggies", "Grilled Salmon/Tofu + Broccoli", "Bottle Gourd Sabzi + 1 Bran Roti", "Moong Dal Sprouts Salad", "Cauliflower Rice + Paneer/Chicken Tikka"]
-    
-    yoga = ["Baddha Konasana (Butterfly)", "Bhujangasana (Cobra)", "Balasana (Child's Pose)", "Viparita Karani (Legs up Wall)", "Supta Baddha Konasana", "Marjaryasana (Cat-Cow)", "Adho Mukha Svanasana (Downward Dog)"]
-    
-    c1, c2 = st.columns(2)
-    with c1:
-        st.markdown(f"""
-        <div class='glass-box'>
-            <h4>Culinary Protocol ({region})</h4>
-            <p><strong>💧 AM Detox:</strong> {detox[day % len(detox)]}</p>
-            <p><strong>🍳 Breakfast:</strong> {bfast}</p>
-            <p><strong>🍱 Lunch:</strong> {lunch[day % len(lunch)]}</p>
-            <p><strong>🥗 Snack:</strong> {snack[day % len(snack)]}</p>
-            <p><strong>🌙 Dinner:</strong> {dinner[day % len(dinner)]}</p>
+        .calligraphy-title { 
+            font-family: 'Great Vibes', cursive; 
+            font-size: 7.5rem; 
+            text-align: center; 
+            margin: 10px 0; 
+            background: linear-gradient(to right, #B83280, #F472B6, #ffb6c1, #B83280);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shine 4s linear infinite;
+            filter: drop-shadow(2px 4px 6px rgba(255,255,255,0.6));
+        }
+        @keyframes shine { to { background-position: 200% center; } }
+
+        .doodle { position: fixed; pointer-events: none; opacity: 0.75; z-index: -1; }
+        .doodle-bow { top: 5%; right: 10%; width: 70px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15)); }
+        .doodle-pill { bottom: 15%; left: 6%; width: 60px; transform: rotate(-20deg); filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15)); }
+        .doodle-plant { position: fixed; bottom: 15px; right: 25px; width: 55px; transition: width 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 100; pointer-events: none; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2)); }
+
+        .window-container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border);
+            border-radius: 40px; 
+            padding: 50px;
+            box-shadow: var(--glass-shadow), inset 0 0 20px rgba(255,255,255,0.5);
+            max-width: 1000px; margin: 30px auto 60px;
+            position: relative;
+            display: none;
+            animation: floatUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .active-window { display: block; }
+        @keyframes floatUp { from { opacity: 0; transform: translateY(40px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+        h3, h4 { font-family: 'Playfair Display', serif; color: var(--deep-magenta); }
+        .quote { font-family: 'Playfair Display', serif; font-style: italic; text-align: center; color: var(--deep-magenta); margin: 30px 0 20px; font-size: 1.4rem; }
+
+        input, select, textarea { 
+            width: 100%; padding: 16px 25px; margin: 10px 0 25px; 
+            border-radius: 35px; 
+            border: 1px solid rgba(255, 255, 255, 0.9); 
+            background: var(--input-glass); 
+            backdrop-filter: blur(12px);
+            color: var(--text-dark); 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            font-size: 1.05rem;
+            font-weight: 600;
+            box-sizing: border-box; outline: none; 
+            box-shadow: inset 0 4px 6px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+        }
+        input:focus, select:focus, textarea:focus { 
+            border-color: var(--deep-magenta); background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 20px rgba(244, 114, 182, 0.4); 
+        }
+
+        button {
+            background: linear-gradient(145deg, #F472B6, #B83280);
+            color: white; font-weight: 800; border-radius: 40px; border: none;
+            padding: 18px 50px; font-size: 1.2rem; cursor: pointer; display: block; margin: 30px auto;
+            box-shadow: 0 12px 30px rgba(184, 50, 128, 0.5), inset 0 3px 6px rgba(255,255,255,0.4);
+            text-transform: uppercase; letter-spacing: 1.5px; transition: all 0.3s ease;
+        }
+        button:hover { transform: scale(1.05) translateY(-4px); box-shadow: 0 15px 40px rgba(184, 50, 128, 0.6); }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .glass-box { 
+            background: rgba(255, 255, 255, 0.65); border-radius: 30px; padding: 30px; 
+            margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.9); 
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05); 
+        }
+
+        details.faq-glass {
+            background: rgba(255,255,255,0.5); border-radius: 25px; padding: 18px 25px;
+            margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.8);
+            cursor: pointer; transition: all 0.3s ease;
+        }
+        details.faq-glass[open] { background: rgba(255,255,255,0.9); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        summary { font-weight: 800; color: var(--deep-magenta); font-size: 1.15rem; outline: none; }
+        
+        .chart-container { display: flex; align-items: flex-end; height: 180px; gap: 15px; margin: 30px 0; padding-bottom: 15px; border-bottom: 3px solid rgba(184,50,128,0.2); }
+        .bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; }
+        .bar { width: 100%; border-radius: 15px 15px 0 0; box-shadow: 0 -4px 15px rgba(0,0,0,0.1); transition: height 1.2s ease; position: relative;}
+        
+        .bar-red { background: linear-gradient(to top, #ef4444, #fca5a5); }
+        .bar-purple { background: linear-gradient(to top, #9333ea, #d8b4fe); }
+        .bar-yellow { background: linear-gradient(to top, #eab308, #fef08a); }
+        .bar-peach { background: linear-gradient(to top, #f97316, #fdba74); }
+        
+        .bar-label { margin-top: 12px; font-weight: 800; font-size: 0.9rem; text-align: center; color: var(--deep-magenta); }
+        .bar-value { position: absolute; top: -30px; width: 100%; text-align: center; font-weight: 900; color: var(--text-dark); font-size: 1.1rem; }
+
+        .disclaimer { 
+            background: rgba(255, 255, 255, 0.8); 
+            border: 2px dashed var(--primary-pink); 
+            padding: 20px; 
+            border-radius: 25px; 
+            font-size: 0.9rem; 
+            color: #9D174D; 
+            text-align: center; 
+            margin-top: 40px; 
+            font-weight: 800; 
+        }
+        
+        svg.hero { width: 28px; height: 28px; vertical-align: middle; margin-right: 10px; stroke: var(--deep-magenta); fill: none; stroke-width: 2.5; }
+    </style>
+</head>
+<body onload="initApp()">
+
+    <div class="animated-overlay"></div>
+    <img src="https://cdn-icons-png.flaticon.com/512/3024/3024310.png" class="doodle doodle-pill">
+    <img src="https://cdn-icons-png.flaticon.com/512/3075/3075908.png" class="doodle doodle-bow">
+    <img id="growth-plant" class="doodle-plant" src="https://cdn-icons-png.flaticon.com/512/892/892926.png">
+
+    <div class="calligraphy-title">Shealth+</div>
+    <div style="text-align:center; font-weight:900; color:var(--deep-magenta); margin-bottom: 25px; font-size:1.2rem;" id="ist-clock">Loading Clock...</div>
+
+    <div id="win-1" class="window-container active-window">
+        <h3 style="text-align:center; font-size: 2.2rem; margin-top:0;">Endocrine Aesthetics & Clinical Nutrition</h3>
+        <div class="grid-2" style="margin-top: 40px;">
+            <div>
+                <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600" style="width:100%; border-radius: 35px; margin-bottom: 20px; border: 2px solid white;">
+            </div>
+            <div>
+                <details class="faq-glass"><summary>What is Endocrine Pacing?</summary><p>Balancing complex carbs throughout the day to prevent insulin spikes.</p></details>
+                <details class="faq-glass"><summary>Why Regional Palates?</summary><p>Your gut microbiome digests local, culturally familiar spices more efficiently.</p></details>
+            </div>
         </div>
-        """, unsafe_allow_html=True)
-    with c2:
-        st.markdown(f"""
-        <div class='glass-box'>
-            <h4>Target Fitness & Yoga</h4>
-            <p><strong>Daily Yoga Asana:</strong> {yoga[day % len(yoga)]}</p>
-            <div style="background:rgba(255,255,255,0.4); height:120px; border-radius:15px; display:flex; align-items:center; justify-content:center; border: 1px dashed #B83280;">[ Target AI Workout Video ]</div>
-        </div>
-        """, unsafe_allow_html=True)
-
-    st.button("View Monthly Reds Analytics", on_click=set_window, args=(5,))
-    st.markdown(get_disclaimer(), unsafe_allow_html=True)
-
-# --- WINDOW 5: MONTHLY REDS ENHANCED TRACKER ---
-elif st.session_state.window == 5:
-    st.markdown("<div class='glass-box'><h3>🎀 Enhanced Monthly Blues & Mood Diagnostics</h3></div>", unsafe_allow_html=True)
-    
-    if st.session_state.p_gender == "Female":
-        c1, c2 = st.columns(2)
-        with c1: st.session_state.lmp = st.date_input("Last Menstrual Date (Update):", value=st.session_state.lmp)
-        with c2: st.session_state.cycle_len = st.number_input("Average Cycle Length (Days):", value=st.session_state.cycle_len)
-        
-        days_diff = (datetime.today().date() - st.session_state.lmp).days
-        day_of_cycle = (days_diff % st.session_state.cycle_len) or 1
-        
-        phase = "Menstruation" if day_of_cycle <= 5 else "Follicular" if day_of_cycle <= 13 else "Ovulation" if day_of_cycle <= 16 else "Luteal Phase"
-        advice = "Prioritize rest & iron." if phase == "Menstruation" else "Estrogen is rising. High energy!" if phase == "Follicular" else "Peak strength!" if phase == "Ovulation" else "Increase Magnesium (Dark Chocolate)."
-        
-        st.markdown(f"<div class='glass-box'><h4 style='text-align:center;'>Current Phase: Day {day_of_cycle} - {phase}</h4><p style='text-align:center;'>AI Suggestion: {advice}</p></div>", unsafe_allow_html=True)
-    else:
-        st.info("Monthly Blues Tracking is configured for Female profiles only.")
-
-    mood = st.selectbox("Daily Mood & Comfort Bucket:", ["Happy & Energetic ✨", "Anxious / Overwhelmed 🥺", "Physical Discomfort / Cramps 💊"])
-    st.markdown("<div class='glass-box'><strong>AI Recommended Comfort Bucket:</strong><br><ul>" + 
-                ("<li>Hit a personal best in workout!</li><li>Post a glowing selfie</li>" if "Happy" in mood else 
-                 "<li>5-Minute Box Breathing</li><li>Sip Chamomile Tea</li>" if "Anxious" in mood else 
-                 "<li>Warm Heating Pad on Abdomen</li><li>Gentle Yin Yoga</li>") + 
-                "</ul></div>", unsafe_allow_html=True)
-
-    st.button("Open Daily Utilities Dashboard", on_click=set_window, args=(6,))
-    st.markdown(get_disclaimer(), unsafe_allow_html=True)
-
-# --- WINDOW 6: DASHBOARD, ALARMS & FOUNDER ---
-elif st.session_state.window == 6:
-    st.markdown("<div class='glass-box'><h3>Daily Utilities & Alarms Dashboard</h3></div>", unsafe_allow_html=True)
-    
-    c1, c2 = st.columns(2)
-    with c1:
-        st.markdown("<div class='glass-box'><h4>💧 Hydration Tracker</h4>", unsafe_allow_html=True)
-        if st.button("+ Log Glass"): pass
-        st.checkbox("Activate 60-Min Hydration Alarm")
-        st.markdown("</div>", unsafe_allow_html=True)
-    with c2:
-        st.markdown("<div class='glass-box'><h4>🔥 End of Day Checklist</h4><p>Log EOD Weight:</p>", unsafe_allow_html=True)
-        st.number_input("Weight (kg)", key="eod_weight")
-        if st.button("Save EOD Data"): pass
-        st.markdown("</div>", unsafe_allow_html=True)
-        
-    st.markdown("""
-    <div class='glass-box' style='background: linear-gradient(145deg, #F472B6, #B83280); color:white;'>
-        <h3 style='color:white;'>Clinical Architecture</h3>
-        <p style='font-size:1.2rem; font-weight:bold;'>Maihwish Rizvi | Registered Pharmacist</p>
-        <p>Engineered with precision clinical protocols to bypass fitness trends and target authentic neuroendocrine baselines. Welcome to the future of aesthetic health technology.</p>
+        <button onclick="jumpTo(2)">Begin Clinical Intake</button>
+        <div class="disclaimer">⚠️ Health Disclaimer: SHEALTH+ is not a replacement for professional medical advisors.</div>
     </div>
-    """, unsafe_allow_html=True)
 
-    st.button("End Session & Logout", on_click=set_window, args=(1,))
-    st.markdown(get_disclaimer(), unsafe_allow_html=True)
+    <div id="win-2" class="window-container">
+        <h3>Patient Registration Portal</h3>
+        <div class="grid-2">
+            <div>
+                <label>Full Name:</label> <input type="text" id="p_name">
+                <label>Age:</label> <input type="number" id="p_age">
+            </div>
+            <div>
+                <label>Biological Gender:</label>
+                <select id="p_gender"><option>Female</option><option>Male</option></select>
+                <label>Region:</label>
+                <select id="p_region"><option>North India</option><option>South India</option><option>East India</option><option>West India</option></select>
+                <label>Target:</label>
+                <select id="p_target"><option>Weight Loss</option><option>Weight Gain</option></select>
+            </div>
+        </div>
+        <button onclick="jumpTo(3)">Lock Profile</button>
+        <div class="disclaimer">⚠️ Health Disclaimer: SHEALTH+ is not a replacement for professional medical advisors.</div>
+    </div>
+
+    <div id="win-3" class="window-container">
+        <h3>Biometrics & History</h3>
+        <div class="grid-2">
+            <div><label>Weight (kg):</label> <input type="number" id="p_weight" oninput="calcBMI()"></div>
+            <div><label>Height (cm):</label> <input type="number" id="p_height" oninput="calcBMI()"></div>
+        </div>
+        <div class="glass-box" style="text-align:center;">
+            <strong>AI Calculated BMI: <span id="bmi_result" style="font-size:3rem; display:block;">--</span></strong>
+        </div>
+        <button onclick="jumpTo(4)">Generate Plan</button>
+        <div class="disclaimer">⚠️ Health Disclaimer: SHEALTH+ is not a replacement for professional medical advisors.</div>
+    </div>
+
+    <div id="win-4" class="window-container">
+        <h3>30-Day Precision Tracking</h3>
+        <div class="glass-box" style="display:flex; justify-content:space-between;">
+            <label>Slide Active Day (1-30):</label>
+            <input type="range" id="day-slider" min="1" max="30" value="1" onchange="updateDashboardDay()" style="width:50%;">
+            <span id="day-label" style="font-size:2rem; font-weight:bold; color:var(--deep-magenta);">Day 1</span>
+        </div>
+        <div class="grid-2">
+            <div class="glass-box">
+                <h4>Culinary Protocol</h4>
+                <strong>Breakfast:</strong> <span id="diet_bfast">Paneer Oats Cheela</span><br><br>
+                <strong>Lunch:</strong> <span id="diet_lunch">Quinoa Bowl</span>
+            </div>
+            <div class="glass-box">
+                <h4>Target Fitness</h4>
+                <strong>Yoga:</strong> <span id="yoga_plan">Baddha Konasana</span>
+            </div>
+        </div>
+        <button onclick="jumpTo(5)">View Monthly Analytics</button>
+        <div class="disclaimer">⚠️ Health Disclaimer: SHEALTH+ is not a replacement for professional medical advisors.</div>
+    </div>
+
+    <div id="win-5" class="window-container">
+        <h3>Enhanced Monthly Blues</h3>
+        <div class="glass-box">
+            <h4 style="text-align:center;">Cycle Phase Metric Graph</h4>
+            <div class="chart-container">
+                <div class="bar-col"><div class="bar bar-red" style="height: 20%;"><div class="bar-value">1-5</div></div><div class="bar-label">Menstrual</div></div>
+                <div class="bar-col"><div class="bar bar-peach" style="height: 40%;"><div class="bar-value">6-13</div></div><div class="bar-label">Follicular</div></div>
+                <div class="bar-col"><div class="bar bar-yellow" style="height: 80%;"><div class="bar-value">14-16</div></div><div class="bar-label">Ovulation</div></div>
+                <div class="bar-col"><div class="bar bar-purple" style="height: 60%;"><div class="bar-value">17-28</div></div><div class="bar-label">Luteal</div></div>
+            </div>
+        </div>
+        <button onclick="jumpTo(6)">Open Daily Utilities</button>
+        <div class="disclaimer">⚠️ Health Disclaimer: SHEALTH+ is not a replacement for professional medical advisors.</div>
+    </div>
+
+    <div id="win-6" class="window-container">
+        <h3>Daily Utilities & Alarms</h3>
+        <div class="grid-2">
+            <div class="glass-box">
+                <h4>💧 Hydration Tracker</h4>
+                <p style="font-size:2rem; font-weight:bold; text-align:center;" id="water_status">0 / 8 Glasses</p>
+                <button onclick="logWater()" style="padding:10px 20px; font-size:1rem;">+ Log Glass</button>
+            </div>
+        </div>
+        
+        <div class="glass-box" style="background:linear-gradient(145deg, #F472B6, #B83280); color:white; margin-top:40px;">
+            <h3 style="color:white; margin-top:0;">Clinical Architecture</h3>
+            <p style="font-size:1.6rem; font-weight:900; margin-bottom:0;">Maihwish Rizvi</p>
+            <p style="font-size:1.2rem; font-weight:bold;">Registered Pharmacist</p>
+            <p>Engineered with precision clinical protocols to bypass fitness trends and target authentic neuroendocrine baselines.</p>
+        </div>
+        <button onclick="jumpTo(1)">End Session</button>
+        <div class="disclaimer">⚠️ Health Disclaimer: SHEALTH+ is not a replacement for professional medical advisors.</div>
+    </div>
+
+    <script>
+        let waterCount = 0;
+        function initApp() { setInterval(updateClock, 1000); }
+        function jumpTo(winId) {
+            document.querySelectorAll('.window-container').forEach(w => w.classList.remove('active-window'));
+            document.getElementById('win-' + winId).classList.add('active-window');
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+        function updateClock() {
+            let now = new Date();
+            let utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+            let istDate = new Date(utc + (3600000 * 5.5));
+            document.getElementById('ist-clock').innerText = "Delhi IST: " + istDate.toLocaleDateString('en-IN', {weekday:'long', month:'long', day:'numeric', hour:'2-digit', minute:'2-digit'});
+        }
+        function calcBMI() {
+            let w = parseFloat(document.getElementById('p_weight').value);
+            let h = parseFloat(document.getElementById('p_height').value);
+            if(w && h) document.getElementById('bmi_result').innerText = (w / Math.pow(h/100, 2)).toFixed(1);
+        }
+        function updateDashboardDay() {
+            let day = document.getElementById('day-slider').value;
+            document.getElementById('day-label').innerText = "Day " + day;
+            document.getElementById('growth-plant').style.width = (50 + (day * 2)) + "px";
+        }
+        function logWater() {
+            if(waterCount < 8) waterCount++;
+            document.getElementById('water_status').innerText = `${waterCount} / 8 Glasses`;
+        }
+    </script>
+</body>
+</html>
+"""
+
+# 4. Render the HTML using Streamlit Components
+components.html(html_code, height=1400, scrolling=True)
