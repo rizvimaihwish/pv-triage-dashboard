@@ -57,7 +57,7 @@ st.markdown("""
         opacity: 0.10; pointer-events: none; z-index: 0;
     }
     
-    html, body, [class*="css"] { font-family: 'Plus Jakarta Sans', sans-serif; color: #451A1A; }
+    /* Force Text Colors to dark maroon to override Dark Mode */     html, body, [class*="css"], .stApp p, .stApp span, .stApp div, .stApp label, .stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp h5, .stApp h6 {          font-family: 'Plus Jakarta Sans', sans-serif !important;          color: #451A1A !important;      }
     
     /* Calligraphed Luxury HEADING - SHEALTH Crimson Gold Branding */
     .logo-container { text-align: center; margin-bottom: 2px; padding-top: 15px; }
