@@ -1,3 +1,18 @@
+import streamlit as st
+
+# Setup Streamlit Page
+st.set_page_config(page_title="SHEALTH+ | AI Precision Coach", layout="wide")
+
+# Hide standard Streamlit header and padding to make it look like a full website
+st.markdown("""
+    <style>
+        .block-container { padding: 0rem !important; max-width: 100% !important; }
+        header { display: none !important; }
+    </style>
+""", unsafe_allow_html=True)
+
+# The Entire HTML, CSS, and JS Code wrapped as a Python String
+html_code = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,17 +34,15 @@
             margin: 0; padding: 0;
             font-family: 'Plus Jakarta Sans', sans-serif !important;
             color: var(--text-dark) !important;
-            background-color: #FFE4E1 !important; /* Force Light Peach/Pink */
+            background-color: #FFE4E1 !important; 
             background-image: 
                 radial-gradient(circle at 15% 50%, rgba(244, 114, 182, 0.15), transparent 25%),
                 radial-gradient(circle at 85% 30%, rgba(184, 50, 128, 0.15), transparent 25%);
             background-attachment: fixed;
         }
 
-        /* Heroicon SVGs */
         svg.hero { width: 22px; height: 22px; vertical-align: middle; margin-right: 8px; stroke: var(--magenta); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-        /* Glossy Window Containers */
         .window-container {
             background: var(--glossy-white);
             backdrop-filter: blur(16px);
@@ -51,14 +64,11 @@
         .active-window { display: block; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Typography */
         .calligraphy-title { font-family: 'Alex Brush', cursive; font-size: 6rem; background: var(--metallic-pink); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; margin: 10px 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.1); }
         h3, h4 { font-family: 'Playfair Display', serif; color: var(--magenta); }
         
-        /* Clock Banner */
         .clock-banner { background: var(--glossy-white); border: 1px solid #FBCFE8; border-radius: 20px; padding: 10px 25px; font-weight: bold; color: var(--magenta); text-align: center; max-width: 400px; margin: 0 auto 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
 
-        /* Metallic Buttons */
         button {
             background: var(--metallic-pink); color: white; font-weight: 800; border-radius: 30px; border: none;
             padding: 15px 40px; font-size: 1.1rem; cursor: pointer; display: block; margin: 25px auto;
@@ -67,37 +77,31 @@
         }
         button:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(184, 50, 128, 0.4); }
 
-        /* Inputs & Layouts */
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         input, select, textarea { width: 100%; padding: 12px; margin: 8px 0 15px; border-radius: 12px; border: 1px solid #FBCFE8; background: #FFF5F7; color: var(--text-dark); font-family: 'Plus Jakarta Sans', sans-serif; box-sizing: border-box; outline: none; }
         input:focus, select:focus { border-color: var(--magenta); box-shadow: 0 0 8px rgba(244, 114, 182, 0.4); }
         
-        /* Content Boxes */
         .box { background: white; border-radius: 16px; padding: 20px; margin-bottom: 15px; border-left: 5px solid var(--magenta); box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
         .disclaimer { background: #FFF0F5; border: 1px dashed #F472B6; padding: 15px; border-radius: 15px; font-size: 0.8rem; color: #9D174D; text-align: center; margin-top: 30px; }
         .quote { font-family: 'Playfair Display', serif; font-style: italic; text-align: center; color: var(--magenta); margin: 20px 0; font-size: 1.2rem; }
 
-        /* Menstrual Tracker Chart */
         .cycle-bar { display: flex; height: 30px; border-radius: 15px; overflow: hidden; margin: 15px 0; background: #eee; }
         .phase-menstrual { background: #F43F5E; width: 20%; }
         .phase-follicular { background: #FDBA74; width: 30%; }
         .phase-ovulation { background: #34D399; width: 10%; }
         .phase-luteal { background: #818CF8; width: 40%; }
         
-        /* Doodles */
         .doodle-plant { position: fixed; bottom: 20px; left: 20px; width: 50px; transition: width 1s ease; z-index: 100; pointer-events: none;}
         .doodle-pill { position: absolute; top: 20px; right: 20px; width: 40px; opacity: 0.6; pointer-events: none; }
     </style>
 </head>
 <body onload="initApp()">
 
-    <!-- Growing Plant Doodle (Left corner) -->
     <img id="growth-plant" class="doodle-plant" src="https://cdn-icons-png.flaticon.com/512/892/892926.png" alt="Growing Plant">
 
     <div class="calligraphy-title">Shealth+</div>
     <div class="clock-banner" id="ist-clock">Loading IST Time...</div>
 
-    <!-- ================= WINDOW 1: INTRO & MEDIA ================= -->
     <div id="win-1" class="window-container active-window">
         <img class="doodle-pill" src="https://cdn-icons-png.flaticon.com/512/3024/3024310.png">
         <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200" style="width:100%; border-radius:20px; object-fit: cover; height: 350px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
@@ -107,7 +111,6 @@
         
         <div class="box">
             <h4><svg class="hero" viewBox="0 0 24 24"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg> AI Health Coach Initiative (30s Overview)</h4>
-            <!-- Placeholder for AI Video -->
             <div style="background:#000; height: 200px; border-radius: 12px; display:flex; align-items:center; justify-content:center; color:white;">[ AI Generated Coach Video Placeholder ]</div>
         </div>
 
@@ -116,7 +119,6 @@
         <div class="disclaimer">⚠️ Health Disclaimer: SHEALTH+ provides AI-assisted wellness data and is not a replacement for professional medical advisors or physicians.</div>
     </div>
 
-    <!-- ================= WINDOW 2: HOSPITAL INTAKE & MEDICAL HISTORY ================= -->
     <div id="win-2" class="window-container">
         <h3><svg class="hero" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg> Patient Clinical Registration</h3>
         <div class="grid-2">
@@ -197,7 +199,6 @@
         <button onclick="generateDashboard(3)">Generate Protocol & Dashboard</button>
     </div>
 
-    <!-- ================= WINDOW 3: MASTER DASHBOARD (Diet, Tracking, Period, Music) ================= -->
     <div id="win-3" class="window-container">
         <h3><svg class="hero" viewBox="0 0 24 24"><path d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg> SHEALTH+ Active Command Center</h3>
         
@@ -208,7 +209,6 @@
         </div>
 
         <div class="grid-2">
-            <!-- LEFT COLUMN: Diet & Fitness -->
             <div>
                 <h4><svg class="hero" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z"></path></svg> 4-Course Culinary Protocol</h4>
                 <div class="box">
@@ -228,9 +228,7 @@
                 </div>
             </div>
 
-            <!-- RIGHT COLUMN: Trackers, Mood, Alarms -->
             <div>
-                <!-- Female Tracker -->
                 <div id="blues_meter_box">
                     <h4>🎀 Monthly Blues Meter</h4>
                     <div class="box">
@@ -245,7 +243,6 @@
                     </div>
                 </div>
 
-                <!-- Mood & Comfort Bucket -->
                 <h4><svg class="hero" viewBox="0 0 24 24"><path d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Daily Mood & Comfort</h4>
                 <select id="mood_selector" onchange="updateBucketList()">
                     <option value="Happy">Happy & Energetic</option>
@@ -257,7 +254,6 @@
                     <ul id="bucket_list" style="margin-top:5px; padding-left:20px; font-size:0.9rem;"></ul>
                 </div>
 
-                <!-- Daily Meters & Alarms -->
                 <h4><svg class="hero" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Active System Tracking</h4>
                 <div class="box">
                     <strong>💧 Water Status:</strong> <span id="water_status">0 / 8 Glasses</span>
@@ -272,17 +268,14 @@
 
         <hr style="border:1px solid #FBCFE8; margin: 30px 0;">
 
-        <!-- Music Module -->
         <h4 style="text-align:center;">🎧 30-Min Daily Bollywood/Hollywood Hybrid Mix</h4>
         <div style="background:#f0f0f0; padding:15px; border-radius:15px; text-align:center;">
             <audio controls style="width:100%; outline:none;">
-                <!-- Placeholder for actual audio source -->
                 <source src="" type="audio/mpeg">
                 Your browser does not support the audio element. Placeholder for API hook.
             </audio>
         </div>
 
-        <!-- Founder Card -->
         <div class="box" style="margin-top:40px; background:var(--metallic-pink); color:white; border:none;">
             <h3 style="color:white; margin-top:0;">Founder Architecture</h3>
             <p style="margin:5px 0; font-size:1.1rem; font-weight:bold;">Maihwish Rizvi, B.Pharm (AKTU)</p>
@@ -294,7 +287,6 @@
     </div>
 
     <script>
-        // --- CORE LOGIC & INITIALIZATION ---
         let waterCount = 0;
         let alarmInterval;
         let isMetric = true;
@@ -305,24 +297,20 @@
             updateDashboardDay();
         }
 
-        // Navigation
         function jumpTo(winId) {
             document.querySelectorAll('.window-container').forEach(w => w.classList.remove('active-window'));
             document.getElementById('win-' + winId).classList.add('active-window');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Clock (Delhi IST reference logic)
         function updateClock() {
             const now = new Date();
-            // Convert to IST (UTC+5:30)
             const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
             const istDate = new Date(utc + (3600000 * 5.5));
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute:'2-digit', second:'2-digit' };
             document.getElementById('ist-clock').innerText = "Delhi IST: " + istDate.toLocaleDateString('en-IN', options);
         }
 
-        // Unit Toggle Logic
         function updateUnits() {
             const sys = document.getElementById('unit_system').value;
             isMetric = (sys === 'metric');
@@ -349,7 +337,7 @@
             if(bmi < 18.5) status = "Underweight";
             else if(bmi <= 24.9) status = "Optimal Health Baseline";
             else if(bmi <= 29.9) status = "Overweight Matrix";
-            else status = "Clinical Obesity Protocol Needed";
+            else status = "Obesity Protocol Needed";
             document.getElementById('bmi_status').innerText = status;
         }
 
@@ -363,21 +351,17 @@
             const alertBox = document.getElementById('med_alert');
             if(meds.length > 3) {
                 alertBox.style.display = 'block';
-                alertBox.innerHTML = `<strong>AI Pharmacist Note:</strong> Scanning '${meds}' against national databases. Please ensure hydration is maintained to support hepatic clearance. Monitor for standard GI side-effects.`;
+                alertBox.innerHTML = `<strong>AI Pharmacist Note:</strong> Scanning '${meds}' against databases. Please ensure hydration is maintained to support hepatic clearance. Monitor for standard GI side-effects.`;
             }
         }
 
-        // --- DASHBOARD GENERATION ---
         function generateDashboard(winId) {
-            // Setup Profile text
             document.getElementById('dash_region').innerText = document.getElementById('p_region').value;
             document.getElementById('dash_target').innerText = document.getElementById('p_target').value;
             
-            // Set Calorie target based on goal
             const goal = document.getElementById('p_target').value;
             document.getElementById('cal_target').innerText = goal.includes("Loss") ? "1400 - 1600" : (goal.includes("Gain") ? "2200 - 2500" : "1800 - 2000");
 
-            // Setup Menstrual logic visibility
             if(document.getElementById('p_gender').value !== 'Female') {
                 document.getElementById('blues_meter_box').style.display = 'none';
             } else {
@@ -390,35 +374,29 @@
             jumpTo(winId);
         }
 
-        // --- 30 DAY DIET & WORKOUT ALGORITHM ---
         function updateDashboardDay() {
             const day = parseInt(document.getElementById('day-slider').value);
             document.getElementById('day-label').innerText = "Day " + day;
 
-            // Grow plant dynamically based on day (1 to 30)
             const plant = document.getElementById('growth-plant');
-            plant.style.width = (50 + (day * 2)) + "px"; // Grows from 52px to 110px over 30 days
+            plant.style.width = (50 + (day * 2)) + "px";
 
             const region = document.getElementById('p_region').value;
             const pref = document.getElementById('p_diet_pref').value;
             const goal = document.getElementById('p_target').value;
 
-            // Array structures simulating 30-day rotation
             const detoxList = ["Warm Lemon Honey Water", "Jeera Coriander Decoction", "Apple Cider Vinegar Shot", "Fennel Seed Infusion", "Mint Aloe Vera Flush"];
             
-            // Regional Breakfasts (Veg / NonVeg)
             const bfNorthVeg = ["Paneer Oats Cheela", "Sattu Paratha with Curd", "Besan Chilla", "Dalia Porridge"];
             const bfNorthNv = ["Egg White Scramble", "Chicken Keema Toast", "Masala Omelet"];
             const bfSouthVeg = ["Ragi Idli with Sambar", "Pesarattu (Moong Dal Dosa)", "Oats Upma"];
             const bfSouthNv = ["Malabar Egg Roast", "Egg Dosa", "Chicken Stew"];
-            // Fallbacks for West/East to keep code concise but scalable
             const bfGenVeg = ["Poha with Peanuts", "Methi Thepla", "Brown Rice Flakes"];
             const bfGenNv = ["Anda Poha", "Egg Bhurji with Pav", "Boiled Egg Salad"];
 
             let activeVeg = (region === "North") ? bfNorthVeg : ((region === "South") ? bfSouthVeg : bfGenVeg);
             let activeNv = (region === "North") ? bfNorthNv : ((region === "South") ? bfSouthNv : bfGenNv);
 
-            // Logic to pick based on Preference
             let finalBfast = "";
             if(pref === "Veg") finalBfast = activeVeg[day % activeVeg.length];
             else if (pref === "NonVeg") finalBfast = activeNv[day % activeNv.length];
@@ -444,7 +422,6 @@
             else document.getElementById('fitness_plan').innerText = workDia[day % workDia.length];
         }
 
-        // --- CYCLE CALCULATOR ---
         function calculateCyclePhase() {
             const lmpStr = document.getElementById('p_lmp').value;
             if(!lmpStr) { document.getElementById('cycle_phase').innerText = "Awaiting LMP Input"; return; }
@@ -466,7 +443,6 @@
             document.getElementById('cycle_phase').innerText = `Day ${dayOfCycle} - ${phase}`;
         }
 
-        // --- MOOD & COMFORT ---
         function updateBucketList() {
             const mood = document.getElementById('mood_selector').value;
             const ul = document.getElementById('bucket_list');
@@ -484,7 +460,6 @@
             });
         }
 
-        // --- ALARMS & TRACKERS ---
         function logWater() {
             if(waterCount < 8) waterCount++;
             document.getElementById('water_status').innerText = `${waterCount} / 8 Glasses`;
@@ -493,10 +468,9 @@
         function toggleAlarms() {
             const isChecked = document.getElementById('alarm_water').checked;
             if(isChecked) {
-                // In a real app this is 3600000 (1 hour). Set to 5 seconds for prototype demonstration.
                 alarmInterval = setInterval(() => {
                     alert("💧 SHEALTH+ Reminder: Time to hydrate! Please drink a glass of water.");
-                }, 60000 * 60); // 60 mins
+                }, 60000 * 60);
                 alert("60-minute hydration alarm activated.");
             } else {
                 clearInterval(alarmInterval);
@@ -505,3 +479,7 @@
     </script>
 </body>
 </html>
+"""
+
+# Render the HTML inside the Streamlit app
+st.components.v1.html(html_code, height=1200, scrolling=True)
